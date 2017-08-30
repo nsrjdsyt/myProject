@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*.box{*/
+            /*display: flex;*/
+            /*background: #e8e8e8;*/
+            /*height: 300px;*/
+            /*width: 300px;*/
+
+            /*!*---------------------单项目---------------------*!*/
+
+            /*!* 1个 item水平居中对齐，右对齐*!*/
+            /*!*justify-content: center;*!*/
+            /*!*justify-content: flex-end;*!*/
+
+            /*!* 1个 item垂直居中对齐，下对齐*!*/
+            /*!*align-items: center;*!*/
+
+            /*!*水平垂直居中*!*/
+            /*!*justify-content: center;*!*/
+            /*!*align-items: center;*!*/
+
+            /*!*中下位置*!*/
+            /*!*justify-content: center;*!*/
+            /*!*align-items: flex-end;*!*/
+
+            /*!*右下位置*!*/
+            /*!*justify-content: flex-end;*!*/
+            /*!*align-items: flex-end;*!*/
+
+            /*!*----------------------双项目-------------------------*!*/
+
+            /*!*justify-content: space-between;*!*/
+
+            /*!*flex-direction: column;*!*/
+            /*!*justify-content: space-between;*!*/
+
+            /*!*flex-direction: column;*!*/
+            /*!*justify-content: space-between;*!*/
+            /*!*align-items: center;*!*/
+
+            /*!*flex-direction: column;*!*/
+            /*!*justify-content: space-between;*!*/
+            /*!*align-items: flex-end;*!*/
+
+
+            /*!*justify-content: space-between;*!*/
+
+            /*!*----------------------三项目-------------------------*!*/
+
+            /*!*justify-content: space-between;*!*/
+
+            /*!*----------------------四项目1-------------------------*!*/
+
+            /*flex-wrap: wrap;*/
+            /*justify-content: space-between;*/
+            /*align-content: space-between;*/
+        /*!*----------------------end四项目1-------------------------*!*/
+
+
+        /*}*/
+
+        /*----------------------双项目-------------------------*/
+        /*.item:nth-child(2){*/
+            /*!*align-self: center;*!*/
+
+            /*align-self: flex-end;*/
+        /*}*/
+        /*----------------------end 双项目-------------------------*/
+
+        /*----------------------三项目-------------------------*/
+        /*.item:nth-child(2){*/
+            /*align-self: center;*/
+        /*}*/
+        /*.item:nth-child(3){*/
+            /*align-self: flex-end;*/
+        /*}*/
+        /*----------------------end 三项目-------------------------*/
+
+        /*.inner{*/
+            /*display: inline-block;*/
+            /*width: 80px;*/
+            /*height: 80px;*/
+            /*background: red;*/
+        /*}*/
+
+
+
+        /*----------------------四项目2-------------------------*/
+        .box{
+            display: flex;
+            flex-wrap: wrap;
+            align-content: space-between;
+
+            width: 300px;
+            height: 300px;
+            background: #e8e8e8;
+        }
+        .column{
+            flex-basis: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .item{
+            width: 80px;
+            height: 80px;
+            background: red;
+            display: inline-block;
+        }
+        /*----------------------end四项目2-------------------------*/
+
+    </style>
+</head>
+<body>
+
+    <!--<div class="box">-->
+        <!--<span class="item inner"></span>-->
+        <!--<span class="item inner"></span>-->
+        <!--<span class="item inner"></span>-->
+        <!--<span class="item inner"></span>-->
+    <!--</div>-->
+
+    <div class="box">
+        <div class="column">
+            <span class="item inner"></span>
+            <span class="item inner"></span>
+        </div>
+        <div class="column">
+            <span class="item inner"></span>
+            <span class="item inner"></span>
+        </div>
+    </div>
+
+
+
+</body>
+</html>

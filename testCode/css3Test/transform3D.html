@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>转换是使元素改变 形状 、 尺寸 和 位置 的一种效果，translate() rotate() scale() skew() matrix()</title>
+
+    <style>
+        /*http://www.cnblogs.com/xiaobie123/p/6354235.html*/
+
+        .wrap{
+            background: #e8e8e8;
+            padding: 20px;
+            margin: 20px;
+        }
+        .inner{
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /*原点是左上角 平移： 水平往右50 垂直往下100*/
+        .translate{
+            transform: translate(50px,100px);
+            -ms-transform: translate(50px,100px);		/* IE 9 */
+            -webkit-transform: translate(50px,100px);	/* Safari and Chrome */
+            -o-transform: translate(50px,100px);		/* Opera */
+            -moz-transform: translate(50px,100px);		/* Firefox */
+        }
+
+        /*https://www.zhihu.com/question/28707490*/
+        /*值 rotate(30deg) 把元素顺时针旋转 30 度。变形的原点在元素的中心点，或者是元素X轴和Y轴的50%处。*/
+        .rotateX{
+            transform: rotateX(60deg);
+            -webkit-transform: rotateX(60deg);	/* Safari 和 Chrome */
+            -moz-transform: rotateX(60deg);	/* Firefox */
+        }
+
+        .rotateY{
+            transform: rotateY(60deg);
+            -webkit-transform: rotateY(60deg);	/* Safari 和 Chrome */
+            -moz-transform: rotateY(60deg);	/* Firefox */
+        }
+
+
+        /*通过 scale() 方法，元素的尺寸会增加或减少，根据给定的宽度（X 轴）和高度（Y 轴）参数：x、y轴参数相同时 只写一个就可以了*/
+        .scale{
+            transform: scale(2,4);
+            -ms-transform: scale(2,4);	/* IE 9 */
+            -webkit-transform: scale(2,4);	/* Safari 和 Chrome */
+            -o-transform: scale(2,4);	/* Opera */
+            -moz-transform: scale(2,4);	/* Firefox */
+        }
+
+        /*http://www.cnblogs.com/tangyifeng/p/5248024.html*/
+        /*元素翻转给定的角度，根据给定的水平线（X 轴）和垂直线（Y 轴）参数,,X轴逆时针转为正；Y轴顺时针转为正；*/
+        /*值 skew(30deg,20deg) 围绕 X 轴把元素翻转 30 度，围绕 Y 轴翻转 20 度。*/
+        .skew{
+            transform: skew(30deg,20deg);
+            -ms-transform: skew(30deg,20deg);	/* IE 9 */
+            -webkit-transform: skew(30deg,20deg);	/* Safari and Chrome */
+            -o-transform: skew(30deg,20deg);	/* Opera */
+            -moz-transform: skew(30deg,20deg);	/* Firefox */
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <div class="inner"></div>
+    <div class="inner translate">translate</div>
+    <div class="inner rotateX">rotateX</div>
+    <div class="inner rotateY">rotateY</div>
+    <div class="inner scale">scale</div>
+    <div class="inner skew">skew</div>
+</div>
+
+</body>
+</html>

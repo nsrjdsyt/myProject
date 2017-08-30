@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .holy-grid{
+            display: flex;
+            height: 300px;
+            flex-direction: column;
+        }
+
+        header,footer,.holy-grid-body{
+            flex: 1;
+        }
+        header{
+            height: 100px;
+            background: blueviolet;
+        }
+        footer{
+            height: 20px;
+            background: blue;
+        }
+        .holy-grid-body{
+            display: flex;
+        }
+        .holy-grid-content{
+            flex: 1;
+        }
+        .holy-grid-nav,.holy-grid-ads{
+            flex: 0 0 12em;
+        }
+        .holy-grid-nav{
+            order: -1;
+        }
+
+
+        /*@media (max-width: 768px) {*/
+            /*.holy-grid-body {*/
+                /*flex-direction: column;*/
+                /*flex: 1;*/
+                /*background: #e8e8e8;*/
+            /*}*/
+            /*.holy-grid-nav,*/
+            /*.holy-grid-content,*/
+            /*.holy-grid-ads {*/
+                /*flex: auto;*/
+            /*}*/
+        /*}*/
+    </style>
+</head>
+<body class="holy-grid">
+    <header>i am header</header>
+    <div class="holy-grid-body">
+        <main class="holy-grid-content">holy-grid-content</main>
+        <nav class="holy-grid-nav">holy-grid-nav</nav>
+        <aside class="holy-grid-ads">holy-grid-ads</aside>
+    </div>
+    <footer>...</footer>
+</body>
+</html>

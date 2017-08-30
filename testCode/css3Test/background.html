@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>background-size/background-origin/background-clip</title>
+
+    <style>
+        .wrap{
+            background: #e8e8e8;
+            padding: 20px;
+            margin: 20px;
+        }
+        .inner{
+            width: 100px;
+            height: 100px;
+            border: 5px solid blue;
+            border-radius: 5px;
+            margin-bottom: 10px;
+
+        }
+
+        /*background-size 属性规定背景图片的尺寸大小*/
+        .size{
+            background: url(bg_flower_small.gif);
+            background-size: 50px 50px;
+            background-repeat: no-repeat;
+        }
+
+        /*背景图片可以放置于 content-box、padding-box 或 border-box 区域。*/
+        div.orgin{
+
+            background: url(bg_flower_small.gif);
+            background-size: 50px 50px;
+            background-repeat: no-repeat;
+            background-origin: border-box;
+        }
+
+
+        /*background-clip 属性规定背景颜色的绘制区域。*/
+        .clip{
+            border: 5px dotted blue !important;
+            background-color:yellow;
+            background-clip:content-box;
+
+            /*background: url(bg_flower_small.gif);*/
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="inner"></div>
+        <div class="inner size">size</div>
+        <div class="inner orgin">orgin</div>
+        <div class="inner clip">clip</div>
+    </div>
+
+</body>
+</html>

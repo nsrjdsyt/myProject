@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@keyframes 规则用于创建动画。在 @keyframes 中规定某项 CSS 样式，就能创建由当前样式逐渐改为新样式的动画效果。</title>
+
+    <style>
+
+        .wrap{
+            background: #e8e8e8;
+            padding: 20px;
+            margin: 20px;
+        }
+        .inner{
+            width: 100px;
+            height: 100px;
+            border: 1px solid blue;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            animation: widthChange 2s;
+        }
+
+        /*.inner:hover{*/
+            /*animation: widthChange 2s;*/
+        /*}*/
+
+        @keyframes widthChange {
+            from {
+                width: 100px;
+            }
+
+            to {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrap">
+    <div class="inner"></div>
+
+</div>
+
+</body>
+</html>
