@@ -1,0 +1,1 @@
+console.log(1),$.ajax({url:"/m/ajax/test.json"}).done(function(o){console.log(o)});
