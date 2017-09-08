@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 10);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -71,28 +71,14 @@
 /***/ 0:
 /***/ (function(module, exports) {
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var PRODUCT_TYPE = { //商品类型
-    ITEM: 0, //实物
-    CARD: 1, //卡密
-    PPTV_CHARGE: 2, //pptv会员直充
-    STORE_PICKUP: 3, //门店自提
-    SQUARE_PICKUP: 4, //广场自提
-    COUPON: 5 //优惠券
-};
-
-exports.PRODUCT_TYPE = PRODUCT_TYPE;
+eval("Object.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nvar PRODUCT_TYPE = { //商品类型\n    ITEM: 0, //实物\n    CARD: 1, //卡密\n    PPTV_CHARGE: 2, //pptv会员直充\n    STORE_PICKUP: 3, //门店自提\n    SQUARE_PICKUP: 4, //广场自提\n    COUPON: 5 //优惠券\n};\n\nexports.PRODUCT_TYPE = PRODUCT_TYPE;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvcGFnZXMvY29tbW9uL2NvbnN0YW50LmpzPzUxYTEiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgUFJPRFVDVF9UWVBFID0geyAgICAgICAgICAgLy/llYblk4HnsbvlnotcclxuICAgIElURU06IDAsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvL+WunueJqVxyXG4gICAgQ0FSRDogMSwgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8v5Y2h5a+GXHJcbiAgICBQUFRWX0NIQVJHRTogMiwgICAgICAgICAgICAgICAgICAgICAgLy9wcHR25Lya5ZGY55u05YWFXHJcbiAgICBTVE9SRV9QSUNLVVA6IDMsICAgICAgICAgICAgICAgICAgICAgLy/pl6jlupfoh6rmj5BcclxuICAgIFNRVUFSRV9QSUNLVVA6IDQsICAgICAgICAgICAgICAgICAgICAvL+W5v+WcuuiHquaPkFxyXG4gICAgQ09VUE9OOiA1ICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8v5LyY5oOg5Yi4XHJcbn07XHJcblxyXG5leHBvcnQgeyBQUk9EVUNUX1RZUEUgfVxyXG5cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc3JjL3BhZ2VzL2NvbW1vbi9jb25zdGFudC5qcyJdLCJtYXBwaW5ncyI6Ijs7O0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFOQTtBQUNBO0FBUUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///0\n");
 
 /***/ }),
 
-/***/ 10:
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
-var _constant = __webpack_require__(0);
-
-console.log("i in test page:", _constant.PRODUCT_TYPE.CARD);
+eval("var _constant = __webpack_require__(0);\n\ndocument.getElementById('content').innerHTML = 'i am test page!';\n\nconsole.log(\"i in test page:\", _constant.PRODUCT_TYPE.CARD);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiOC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvcGFnZXMvdGVzdC9tYWluLmpzPzNhMjQiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgUFJPRFVDVF9UWVBFIH0gZnJvbSAnLi4vY29tbW9uL2NvbnN0YW50JztcclxuXHJcbmRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdjb250ZW50JykuaW5uZXJIVE1MID0gJ2kgYW0gdGVzdCBwYWdlISc7XHJcblxyXG5jb25zb2xlLmxvZyhcImkgaW4gdGVzdCBwYWdlOlwiLFBST0RVQ1RfVFlQRS5DQVJEKTtcclxuXG5cblxuLy8gV0VCUEFDSyBGT09URVIgLy9cbi8vIHNyYy9wYWdlcy90ZXN0L21haW4uanMiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///8\n");
 
 /***/ })
 

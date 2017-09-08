@@ -1,5 +1,6 @@
-var path = require("path"); //webpack升级到2.0以后，路径需要引用这个模块
-var htmlWebpackPlugin = require('html-webpack-plugin');
+var path = require("path");
+var htmlWebpackPlugin = require('html-webpack-plugin');        //根据模板生产html文件
+var ExtractTextPlugin = require('extract-text-webpack-plugin'); //提取css到单独文件
 
 module.exports = {
     entry: {
@@ -15,46 +16,57 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/, //用正则匹配找到所有的js文件
-                include: path.resolve(__dirname, 'src'), //指定babel-loaders寻找的文件路径，注意需是绝对路径
-                exclude: path.resolve(__dirname, 'node_modules'), //排除node_modules文件下js，注意需是绝对路径
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader'
                 }
             }, {
                 test: /\.css$/,
-                include: path.resolve(__dirname, 'src'), //指定babel-loaders寻找的文件路径，注意需是绝对路径
-                exclude: path.resolve(__dirname, 'node_modules'), //排除node_modules文件下js，注意需是绝对路径
-                use: [
-                    {
-                        loader: 'style-loader'
-                    }, //注意先后顺序，一般都要先用css-loader处理完然后用style-loader生成style标签,但webpack读取的顺序是从右到左
-                    {
-                        loader: 'css-loader'
-                    }
-                ]
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                  fallback: "style-loader",
+                  use: "css-loader"
+                })
+                // use: [
+                //     {
+                //         loader: 'style-loader'
+                //     }, //注意先后顺序，一般都要先用css-loader处理完然后用style-loader生成style标签,但webpack读取的顺序是从右到左
+                //     {
+                //         loader: 'css-loader'
+                //     }
+                // ]
             }, {
                 test: /\.scss$/,
-                include: path.resolve(__dirname, 'src'), //指定babel-loaders寻找的文件路径，注意需是绝对路径
-                use: [
-                    {
-                        loader: "style-loader"
-                    }, {
-                        loader: "css-loader"
-                    }, {
-                        loader: "postcss-loader"
-                    }, {
-                        loader: "sass-loader"
-                    }
-                ]
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
+                use: ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: ['css-loader', "postcss-loader", 'sass-loader']
+                })
+                // use: [
+                //     {
+                //         loader: "style-loader"
+                //     }, {
+                //         loader: "css-loader"
+                //     }, {
+                //         loader: "postcss-loader"
+                //     }, {
+                //         loader: "sass-loader"
+                //     }
+                // ]
             }, {
                 test: /\.tpl$/,
-                exclude: path.resolve(__dirname, 'node_modules'),
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
                 use: {
                     loader: 'art-template-loader'
                 }
             }, {
                 test: /\.(jpg|png|gif|svg)$/,
-                exclude: path.resolve(__dirname, 'node_modules'),
+                include: path.resolve(__dirname, 'src'),
+                exclude: /node_modules/,
                 use: [
                     {
                         loader: 'file-loader?name=asset/[hash].[ext]'
@@ -71,7 +83,7 @@ module.exports = {
             template: 'index.html', //生成文件的 模板
             title: 'index page',
             inject: 'body',
-            chunks: ['index','common'] //注意是数组
+            chunks: ['index','common']
         }),
         new htmlWebpackPlugin({
             filename: 'test.html', //生成的文件名字
@@ -79,7 +91,8 @@ module.exports = {
             title: 'test page',
             inject: 'body',
             chunks: ['test', 'common']
-        })
+        }),
+        new ExtractTextPlugin('css/[name].css')
     ],
     devtool: "cheap-module-eval-source-map"
 }

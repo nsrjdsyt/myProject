@@ -70,19 +70,7 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var PRODUCT_TYPE = { //商品类型
-    ITEM: 0, //实物
-    CARD: 1, //卡密
-    PPTV_CHARGE: 2, //pptv会员直充
-    STORE_PICKUP: 3, //门店自提
-    SQUARE_PICKUP: 4, //广场自提
-    COUPON: 5 //优惠券
-};
-
-exports.PRODUCT_TYPE = PRODUCT_TYPE;
+eval("Object.defineProperty(exports, \"__esModule\", {\n    value: true\n});\nvar PRODUCT_TYPE = { //商品类型\n    ITEM: 0, //实物\n    CARD: 1, //卡密\n    PPTV_CHARGE: 2, //pptv会员直充\n    STORE_PICKUP: 3, //门店自提\n    SQUARE_PICKUP: 4, //广场自提\n    COUPON: 5 //优惠券\n};\n\nexports.PRODUCT_TYPE = PRODUCT_TYPE;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy9zcmMvcGFnZXMvY29tbW9uL2NvbnN0YW50LmpzPzUxYTEiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgUFJPRFVDVF9UWVBFID0geyAgICAgICAgICAgLy/llYblk4HnsbvlnotcclxuICAgIElURU06IDAsICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvL+WunueJqVxyXG4gICAgQ0FSRDogMSwgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8v5Y2h5a+GXHJcbiAgICBQUFRWX0NIQVJHRTogMiwgICAgICAgICAgICAgICAgICAgICAgLy9wcHR25Lya5ZGY55u05YWFXHJcbiAgICBTVE9SRV9QSUNLVVA6IDMsICAgICAgICAgICAgICAgICAgICAgLy/pl6jlupfoh6rmj5BcclxuICAgIFNRVUFSRV9QSUNLVVA6IDQsICAgICAgICAgICAgICAgICAgICAvL+W5v+WcuuiHquaPkFxyXG4gICAgQ09VUE9OOiA1ICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8v5LyY5oOg5Yi4XHJcbn07XHJcblxyXG5leHBvcnQgeyBQUk9EVUNUX1RZUEUgfVxyXG5cblxuXG4vLyBXRUJQQUNLIEZPT1RFUiAvL1xuLy8gc3JjL3BhZ2VzL2NvbW1vbi9jb25zdGFudC5qcyJdLCJtYXBwaW5ncyI6Ijs7O0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFOQTtBQUNBO0FBUUEiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///0\n");
 
 /***/ })
 /******/ ]);
