@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <top-header></top-header>
-    <div class="content"></div>
+    <router-view class="content"></router-view>
     <bottom-nav></bottom-nav>
   </div>
 </template>
@@ -22,11 +22,10 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   width: 750px;
-
   height: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-
 }
 
 .content{

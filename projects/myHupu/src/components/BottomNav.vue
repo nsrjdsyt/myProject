@@ -1,10 +1,10 @@
 <template>
   <ul class="bottom-nav">
-    <li class=""><i class="news-icon"></i>新闻</li>
-    <li class=""><i class="news-icon"></i>比赛</li>
-    <li class=""><i class="news-icon"></i>社区</li>
-    <li class=""><i class="news-icon"></i>识货</li>
-    <li class=""><i class="news-icon"></i>更多</li>
+    <li class=""><router-link to="/news"><i class="news-icon"></i>新闻</router-link></li>
+    <li class=""><router-link to="/games"><i class="news-icon"></i>比赛</router-link></li>
+    <li class=""><router-link to="/community"><i class="news-icon"></i>社区</router-link></li>
+    <li class=""><router-link to="/goods"><i class="news-icon"></i>识货</router-link></li>
+    <li class=""><router-link to="/more"><i class="news-icon"></i>更多</router-link></li>
   </ul>
 </template>
 
