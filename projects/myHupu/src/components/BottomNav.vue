@@ -1,10 +1,10 @@
 <template>
   <ul class="bottom-nav">
-    <li class=""><router-link to="/news"><i class="news-icon"></i>新闻</router-link></li>
-    <li class=""><router-link to="/games"><i class="news-icon"></i>比赛</router-link></li>
-    <li class=""><router-link to="/community"><i class="news-icon"></i>社区</router-link></li>
-    <li class=""><router-link to="/goods"><i class="news-icon"></i>识货</router-link></li>
-    <li class=""><router-link to="/more"><i class="news-icon"></i>更多</router-link></li>
+    <router-link to="/news" tag="li"><i class="news-icon"></i>新闻</router-link>
+    <router-link to="/games" tag="li"><i class="news-icon"></i>比赛</router-link>
+    <router-link to="/community" tag="li"><i class="news-icon"></i>社区</router-link>
+    <router-link to="/goods" tag="li"><i class="news-icon"></i>识货</router-link>
+    <router-link to="/more" tag="li"><i class="news-icon"></i>更多</router-link>
   </ul>
 </template>
 
@@ -37,6 +37,6 @@ i{
   width: 46px;
   height: 46px;
   margin: 0 auto;
-  background-color: red;
+  /*background-color: red;*/
 }
 </style>

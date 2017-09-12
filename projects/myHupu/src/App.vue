@@ -1,9 +1,13 @@
 <template>
-  <div id="app">
-    <top-header></top-header>
-    <router-view class="content"></router-view>
-    <bottom-nav></bottom-nav>
+<div id="app">
+  <top-header></top-header>
+  <div class="content">
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
+  <bottom-nav></bottom-nav>
+</div>
 </template>
 
 <script>
@@ -11,14 +15,14 @@ import TopHeader from "./components/TopHeader"
 import BottomNav from "./components/BottomNav"
 export default {
   name: 'app',
-  components:{
+  components: {
     TopHeader,
     BottomNav
   }
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   width: 750px;
@@ -28,9 +32,7 @@ export default {
   flex-direction: column;
 }
 
-.content{
- flex: 1;
+.content {
+  flex: 1;
 }
-
-
 </style>
