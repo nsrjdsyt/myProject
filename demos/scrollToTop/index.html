@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>页面置顶demo</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+
+        .content {
+            height: 200%;
+        }
+
+        #top {
+            position: fixed;
+            bottom: 100px;
+            right: 100px;
+            border-radius: 50px;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            z-index: 1;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        xxx
+    </div>
+    <div id="top">置顶</div>
+
+    <script>
+        let _body = document.body,
+            _top = document.getElementById("top")
+
+        _top.addEventListener("click", function(){
+            _body.scrollTop = 0;
+        });
+
+        window.addEventListener("scroll", function(){
+            if (_body.scrollTop > 100) {
+                _top.style.display = "block";
+            } else {
+                _top.style.display = "none";
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -18,6 +18,7 @@
       {{news.text}}
     </li>
   </ul>
+
   <div class="no-news" v-else>
     no news
   </div>
@@ -25,6 +26,8 @@
 </template>
 
 <script>
+import Service from '../utils/service';
+
 export default {
   data() {
     return {
@@ -42,7 +45,7 @@ export default {
     fetchData() {
       this.loading = false;
       this.navList = [];
-      this.axios.get('/mock/newsNavList.json').then((res) => {
+      Service.getNewsNavList().then((res) => {
         this.navList = res.data || [];
 
         if (this.navList.length) {
@@ -57,7 +60,7 @@ export default {
         return
       }
 
-      this.axios.get(`/mock/newsList-${id}.json`).then((res) => {
+      Service.getNewsListById(id).then((res) => {
         this.$set(this.navList[index], 'newsList', res.data)
       });
     },
