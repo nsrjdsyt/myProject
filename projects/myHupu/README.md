@@ -1,6 +1,6 @@
-# my-hupu
+# my-hupu wap project
 
-> A Vue.js project
+> A SAP project, use vue vue-router webpack sass mint-ui
 
 ## Build Setup
 
@@ -18,4 +18,3 @@ npm run build
 npm run build --report
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

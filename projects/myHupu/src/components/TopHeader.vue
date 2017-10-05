@@ -25,8 +25,7 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 170px 40px;
-  /*background-color: rgb(191,30,46);*/
-  background-color: #fff;
+  background-color: rgb(191,30,46);
 }
 
 .search-icon{
