@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+    <div class="content"></div>
+
+    <script type="text/html" id="sn-pages-wrap">
+        <div class="select-page">
+            <a class="prev {{pageNum <= 1 ? '' : 'page-link'}}" href="javascript:;" data-num="{{pageNum - 1}}"><b></b> 上一页</a> {{each randerArr as item itemIndex}}
+            <a class="{{item.noClick ? 'no-page-link' : 'page-link'}} {{ pageNum == item.num ? 'current' : ''}}" href="javascript:;" data-num="{{item.num}}">{{item.num}}</a> {{/each}}
+            <a class="next {{pageNum >= pageCount ? '' : 'page-link'}}" href="javascript:;" data-num="{{pageNum + 1}}"><b></b> 下一页</a>
+            <div class="to-page-num">
+                跳转至<input type="text" class="page-num" />页<input type="button" value="确定" class="page-submit" />
+            </div>
+        </div>
+    </script>
+
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="../common/template.js" charset="utf-8"></script>
+    <script src="./index.js" charset="utf-8"></script>
+</body>
+
+</html>

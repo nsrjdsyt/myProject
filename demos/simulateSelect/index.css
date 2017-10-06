@@ -1,0 +1,55 @@
+.selelct-wrap {
+   position: relative;
+}
+
+body,div, ul, li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.selelct-wrap .selected-text-wrap {
+   display: inline-block;
+   *display: inline;
+   *zoom: 1;
+   cursor: pointer;
+}
+
+.selelct-wrap .selected-text-wrap .arrow-icon {
+   display: inline-block;
+   *display: inline;
+   *zoom: 1;
+   width: 8px;
+   height: 7px;
+   background: url("arrow-icon.png") 0 0 no-repeat;
+   transition: all .5s;
+}
+
+.selelct-wrap .selected-text-wrap .arrow-icon.expand {
+   -webkit-transform: rotate(-180deg);
+   transform: rotate(-180deg);
+   background-position: 0 2px;
+}
+
+.selelct-wrap .option-list {
+   position: absolute;
+   display: none;
+   width: 90px;
+   height: 110px;
+   border: 1px solid #f2f2f2;
+   background-color: #fff;
+   z-index: 100;
+}
+
+.selelct-wrap .option-list li {
+   height: 30px;
+   line-height: 30px;
+   color: #666;
+   font-size: 12px;
+   text-align: left;
+   cursor: pointer;
+}
+
+.selelct-wrap .option-list li.selected {
+   color: #ff7700;
+}

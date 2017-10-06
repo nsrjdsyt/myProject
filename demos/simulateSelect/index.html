@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="index.css">
+        <style media="screen">
+            .content{
+                margin: 10px;
+            }
+        </style>
+    </head>
+    <body>
+
+    <div class="content"></div>
+
+    <script type="text/html" id="select-wrap">
+        <div class="selelct-wrap">
+            <div class="selected-text-wrap">
+                <span class="selected-text">{{curSelectedItem.text}}</span><i class="arrow-icon"></i>
+            </div>
+            <ul class="option-list">
+                {{each selectList as item}}
+                    <li data-value="{{item.value}}" class="{{item.selected ? 'selected' : ''}}">{{item.text}}</li>
+                {{/each}}
+            </ul>
+        </div>
+    </script>
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="../common/template.js" charset="utf-8"></script>
+    <script src="./index.js" charset="utf-8"></script>
+    </body>
+</html>

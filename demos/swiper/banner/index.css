@@ -1,0 +1,74 @@
+.banner-wrap {
+    position: relative;
+    width: 915px;
+    height: 400px;
+}
+
+.banner-wrap .btn {
+    position: absolute;
+    top: 160px;
+    display: block;
+    width: 40px;
+    height: 80px;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    z-index: 10;
+    background: url('') no-repeat #000000;
+}
+
+.banner-wrap .btn:hover {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.banner-wrap .btn.btn-pre {
+    left: 7px;
+    background-position: 11px -1060px;
+}
+
+.banner-wrap .btn.btn-next {
+    right: 7px;
+    background-position: -112px -1060px;
+}
+
+.banner-wrap .banner {
+    position: relative;
+    height: 100%;
+}
+
+.banner-wrap .banner-item {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+}
+
+.banner-wrap .banner-img {
+    width: 915px;
+    height: 400px;
+}
+
+.banner-wrap .banner-pager {
+    position: absolute;
+    bottom: 27px;
+    right: 50%;
+    padding: 4px 10px 4px 0;
+    background-color: #0f5e80;
+    border-radius: 10px;
+}
+
+.banner-wrap .banner-pager li {
+    float: left;
+    display: inline;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #4b94b0;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.banner-wrap .banner-pager li.current {
+    background-color: #fff;
+}

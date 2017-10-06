@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>代码来自http://www.cnblogs.com/starof/p/4956293.html</title>
+
+    <link rel="stylesheet" href="../../common/reset.css">
+    <style>
+        .grid-960 .wapper { width: 100%; min-width:960px;height: auto; margin: 0 auto; background: url(../images/bg-body-960.jpg) no-repeat center top; }
+        .grid-1180 .wapper { width: 100%; min-width:1180px;height: auto; margin: 0 auto; background: url(../images/bg-body-1180.jpg) no-repeat center top; }
+        .grid-1410 .wapper { width: 100%; min-width:1410px;height: auto; margin: 0 auto; background: url(../images/bg-body-1410.jpg) no-repeat center top; }
+
+        /*热门活动*/
+        .grid-960 .section { width: 960px;  margin: 0 auto;background-color:#eaf2ff; }
+        .grid-1180 .section { width: 1180px;  margin: 0 auto;background-color:#eaf2ff;}
+        .grid-1410 .section { width: 1410px;  margin: 0 auto;background-color:#eaf2ff;}
+
+        .title{padding:0 102px;height:70px;line-height:70px;font-size:24px;font-weight:normal;color:#fff;text-shadow: 0 3px #df2828, 3px 0 #df2828;background:#cc2223 url(../images/bg-title.jpg) no-repeat left top;}
+
+        .viewall:hover{text-decoration:none;}
+        .viewall{font-size:18px;;color:#fff;text-shadow: 0 3px #df2828, 3px 0 #df2828;float:right;}
+
+        .grid-1410 .title {padding:0 116px;background-image:url(../images/bg-title-1410.jpg);}
+
+        .grid-960 .contentwrap{width:800px;margin:0 auto;}
+        .grid-1180 .contentwrap{width:980px;margin:0 auto;}
+        .grid-1410 .contentwrap{width:1180px;margin:0 auto;}
+
+        .grid-960 .activity{width:826px;height:152px;overflow:hidden;margin:0 auto;position:relative;}
+        .grid-1180 .activity{width:1020px;height:192px;overflow:hidden;margin:0 auto;position:relative;}
+        .grid-1410 .activity{width:1230px;height:232px;overflow:hidden;margin:0 auto;position:relative;}
+
+        .grid-960 .activity ul{height:152px;overflow:hidden;}
+        .grid-1180 .activity ul{height:192px;overflow:hidden;}
+        .grid-1410 .activity ul{height:232px;overflow:hidden;}
+
+        .activity li img{display:block;width:100%;height:100%;}
+        .activity li{display:block;float:left;}
+
+        .grid-960 .activity li{width:250px;height:125px;overflow:hidden;margin:12px;}
+        .grid-1180 .activity li{width:300px;height:150px;overflow:hidden;margin:20px;}
+        .grid-1410 .activity li{width:360px;height:180px;overflow:hidden;margin:25px;}
+        /*js切换*/
+        .pg_left,.pg_right {position: absolute;z-index: 999;width: 35px;height: 50px;overflow: hidden;}
+        .pg_right {background: transparent url(http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161439384-398978653.png) no-repeat scroll 5px 7px;}
+        .pg_right:hover {background: transparent url(http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161431525-1795374298.png) no-repeat scroll 0 0;}
+        .grid-960 .pg_right{top:75px;right:16px;margin-top:-25px;}
+        .grid-1180 .pg_right{top:95px;right:20px;margin-top:-25px;}
+        .grid-1410 .pg_right{top:115px;right:25px;margin-top:-25px;}
+
+        .pg_left {background: transparent url(http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161435447-1658273185.png) no-repeat scroll 5px 7px;}
+        .pg_left:hover {background: transparent url(http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161435447-1658273185.png) no-repeat scroll right 0;}
+        .grid-960 .pg_left{top:75px;left:13px;margin-top:-25px;}
+        .grid-1180 .pg_left{top:95px;left:20px;margin-top:-25px;}
+        .grid-1410 .pg_left{top:115px;left:25px;margin-top:-25px;}
+    </style>
+    <script>
+        window.onresize=function(){
+            var winWidth = document.body.clientWidth;
+            if(winWidth <=1180){
+                body.className="grid-960";
+            }else  if (winWidth<= 1410){
+                body.className="grid-1180";
+            }else if (winWidth>1410){
+                body.className="grid-1410";
+            }else {
+                alert("do not know!");
+            }
+        }
+    </script>
+</head>
+<body id="body" class="">
+<script>//初始化状态显示样式判断,放在body后面
+var winWidth = document.body.clientWidth;
+if (winWidth <=1180){
+    body.className="grid-960";
+}else  if (winWidth<= 1410){
+    body.className="grid-1180";
+}else if (winWidth>1410){
+    body.className="grid-1410";
+}else {
+    alert("do not know!");
+}
+</script>
+<div class="wapper">
+
+    <div class="section">
+        <h2 class="title">热门活动</h2>
+        <div class="activity" class="movie" id="activity-slide">
+            <a href="javascript:void(0)" class="pg_left ps_pre"></a>
+            <a href="javascript:void(0)" class="pg_right ps_next" ></a>
+            <ul class="clearfix">
+                <li><a href="javascript:;"><img src="http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161357478-1054375486.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161403712-348644549.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161357478-1054375486.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161403712-348644549.jpg"></a></li>
+                <li><a href="javascript:;"><img src="http://images2015.cnblogs.com/blog/315302/201511/315302-20151111161407884-799124161.jpg"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    //首页图片滚动切换
+    (function($){
+        $.photolist=function(a){
+            var w_li = a.find("li").width();
+            var h_li = a.find("li").height();
+            var margin_li=parseInt(a.find("li").css("marginLeft"));
+            var now = 0;
+            var num = 0;
+            var addli = 0;
+            var lisize = a.find("ul li").size();
+            var htmlall = a.find("ul").html();
+
+            //判断每次滚动数量
+            /*
+             var w_body = $("body").width();
+             if(w_body <=1170){
+             var num = 3;
+             }else if(w_body<= 1380){
+             var num = 4;
+             }else if(w_body>1380){
+             var num = 5;
+             }
+             */
+            var num=3;
+
+            //判断需要添加的li节点数量
+            var reminder=lisize%num;
+            if(lisize%num!=0){addli = num-reminder;}
+            else{addli = 0;}
+            addlist();
+            //点击滚动事件
+            photoscroll();
+
+            $(window).resize(function(){
+                //location.reload();
+                now = 0;
+                addli = 0;
+                a.find("ul").html(htmlall);//html内容还原初始值
+                a.find(".ps_next").show();//按钮样式初始化
+                a.find(".ps_pre").hide();
+                //判断每次滚动数量
+                /*
+                 var w_body = $("body").width();
+                 if(w_body <=1170){
+                 var num = 3;
+                 }else if(w_body<= 1380){
+                 var num = 4;
+                 }else if(w_body>1380){
+                 var num = 5;
+                 }
+                 */
+                var num=3;
+                //判断需要添加的li节点数量
+                var reminder=lisize%num;
+                if(lisize%num!=0){addli = num-reminder;}
+                else{addli = 0;}
+                addlist();
+                w_li = a.find("li").width();
+                margin_li=parseInt(a.find("li").css("marginLeft"));
+                a.find("ul").css({"width":(w_li+margin_li*2)*(lisize+addli)});
+                a.find("ul").animate({"margin-left":0});//ul位置还原
+                btnshow(now,parseInt((lisize+addli)/num),lisize,num);
+            });
+
+
+            function addlist(){
+                for(i=0;i<addli;i++){
+                    var html = a.find("ul li").eq(i).html();
+                    a.find("ul").append("<li>"+html+"</li>");
+                }
+                a.find("ul").css({"width":(w_li+margin_li*2)*(lisize+addli)});
+                //console.log(a.find("ul li").size());
+            }
+            function photoscroll(){
+                a.find(".ps_pre").on("click",function(){
+                    now--;
+                    if(now >= 0){
+                        a.find("ul").animate({"margin-left":-now*num*(w_li+margin_li*2)});
+                        btnshow(now,parseInt((lisize+addli)/num),lisize,num);
+                    }
+                });
+
+                a.find(".ps_next").on("click",function(){
+                    now++;
+                    if(now < (lisize+addli)/num){
+                        a.find("ul").animate({"margin-left":-now*num*(w_li+margin_li*2)});
+                        btnshow(now,parseInt((lisize+addli)/num),lisize,num);
+                    }
+                });
+                btnshow(now,parseInt((lisize+addli)/num),lisize,num);
+            }
+            /***
+             参数说明：
+             now:当前是第几组，默认是0
+             c:总共有几组
+             d:初始化时li的个数
+             e:每组显示li个数
+             ***/
+            function btnshow(now,c,d,e){
+                if(d<=e){//如果初始化时li的个数小于一组要显示的数，则不显示pre和next按钮
+                    a.find(".ps_next").hide();
+                    a.find(".ps_pre").hide();
+                }else if(now==0){//初始化now=0，显示第一组，只显示next
+                    a.find(".ps_next").show();
+                    a.find(".ps_pre").hide();
+                }else if(now==c-1){//显示到最后一组，只显示pre
+                    a.find(".ps_next").hide();
+                    a.find(".ps_pre").show();
+                }else{//显示中间组，pre和next都需要显示
+                    a.find(".ps_next").show();
+                    a.find(".ps_pre").show();
+                }
+            }
+
+        }
+    })(jQuery);
+    $.photolist($("#activity-slide"));
+</script>

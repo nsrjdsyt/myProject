@@ -1,0 +1,24 @@
+.slide-wrap{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 400px;
+    border: 1px solid red;
+    overflow-x: auto;
+}
+.slide-wrap ul{
+    display: table;
+    table-layout: fixed;
+    white-space: nowrap;
+    width: auto;
+}
+.slide-wrap li{
+    -webkit-box-flex: 1;
+    -webkit-box-align: center;
+    -webkit-box-pack: center;
+    display: inline-block;
+    height: 40px;
+    width: 60px;
+    padding: 10px;
+    text-align: center;
+}

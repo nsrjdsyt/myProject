@@ -1,0 +1,153 @@
+.select-page {
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 12px;
+    color: #333;
+}
+
+.select-page a {
+    float: left;
+    position: relative;
+    display: inline;
+    height: 24px;
+    padding: 0 8px;
+    border: 1px solid #D7D7D7;
+    background: #FFF;
+    margin-right: 4px;
+    color: #333;
+    text-align: center;
+    line-height: 24px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.select-page a:hover {
+    color: #F60;
+}
+
+.select-page a.prev b {
+    border-right-color: #B1B1B1;
+}
+
+.select-page a.next b {
+    border-left-color: #B1B1B1;
+}
+
+.select-page .current {
+    border-color: transparent;
+    font-weight: bold;
+}
+
+.select-page .current:hover {
+    color: #333;
+}
+
+.select-page .page-link {
+    cursor: pointer;
+}
+
+.select-page .prev, .select-page .next {
+    width: 68px;
+    height: 24px;
+    line-height: 24px;
+    *line-height: 26px;
+    padding: 0;
+    color: #B1B1B1;
+    cursor: default;
+}
+
+.select-page .prev:hover, .select-page .next:hover {
+    color: #B1B1B1;
+}
+
+.select-page .prev.page-link, .select-page .next.page-link {
+    color: #333;
+    cursor: pointer;
+}
+
+.select-page .prev.page-link:hover, .select-page .next.page-link:hover {
+    color: #F60;
+}
+
+.select-page .prev b, .select-page .next b {
+    position: absolute;
+    width: 0;
+    height: 0;
+    line-height: 0;
+    margin-top: -2px;
+    font-size: 0;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.select-page .prev {
+    text-indent: 6px;
+}
+
+.select-page .prev b {
+    left: 1px;
+    top: 9px;
+    border-right-color: #333;
+}
+
+.select-page .prev.page-link b {
+    border-right-color: #333;
+}
+
+.select-page .next {
+    text-indent: -6px;
+}
+
+.select-page .next b {
+    right: 1px;
+    top: 9px;
+    border-left-color: #333;
+}
+
+.select-page .next.page-link b {
+    border-left-color: #333;
+}
+
+.select-page .no-page-link {
+    padding: 0;
+    border: 0 none;
+    line-height: normal;
+    cursor: default;
+}
+
+.select-page .no-page-link:hover {
+    color: #333;
+}
+
+.select-page .to-page-num {
+    float: left;
+    line-height: 24px;
+    padding-left: 30px;
+    overflow: hidden;
+}
+
+.select-page .to-page-num .page-num {
+    width: 32px;
+    height: 24px;
+    border: 1px solid #D7D7D7;
+    margin: 0 3px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.select-page .to-page-num .page-submit {
+    cursor: pointer;
+    width: 45px;
+    height: 26px;
+    border: 1px solid #d7d7d7;
+    margin-left: 3px;
+    background: #FFF;
+    line-height: 24px;
+    *line-height: 23px;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+}

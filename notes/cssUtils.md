@@ -54,28 +54,53 @@
     ```
 
     ```css
-    .arrow::after{
-        display: inline-block;
-        content: '';
-        width: 12px;
-        height: 12px;
-        border: 2px solid #353d44;
-        border-width: 2px 2px 0 0;
-        -webkit-transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        transform: rotate(45deg);
-    }
-    .triangle{
-        display: inline-block;
-        width: 0;
-        height: 0;
-        font-size: 0;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent #333 transparent transparent;
-    }
+        .arrow::after{
+            display: inline-block;
+            content: '';
+            width: 12px;
+            height: 12px;
+            border: 2px solid #353d44;
+            border-width: 2px 2px 0 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        .triangle{
+            display: inline-block;
+            width: 0;
+            height: 0;
+            font-size: 0;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent #333 transparent transparent;
+        }
+    ```
+- 文字两边带横线
+
+    ```html
+        <span class="has-two-line">text</span>
     ```
 
+    ```css
+        .has-two-line{
+            position: relative;
+        }
+        .has-two-line:before,
+        .has-two-line:after{
+            position: absolute;
+            top: 50%;
+            content: '';
+            width: 30px;
+            height: 1px;
+            background-color: gray;
+        }
+        .has-two-line:before{
+            left: -50px;
+        }
+        .has-two-line:after{
+            right: -50px;
+        }
+    ```
 - [IOS 禁用高亮](http://hi.barretlee.com/2014/03/31/tap-highlight-in-webview/)
 
   ```css
@@ -135,7 +160,7 @@
 
       ```css
          input[type='checkbox']{ display: none; }
-         input[type='checkbox'] + label{ display: inline-block; padding-left: 26px; background: url("./images/select-pro-icon.png") 0 -464px no-repeat; }
+         input[type='checkbox'] + label{ display: inline-block; padding-left: 26px; background: url("http://owtq081ii.bkt.clouddn.com/select-pro-icon.png") 0 -464px no-repeat; }
          input[type='checkbox']:checked + label{ background-position: 0 -510px; }
       ```
 

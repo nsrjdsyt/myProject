@@ -1,5 +1,63 @@
 # js 代码片段
 
+- css命名与驼峰命名转换，[zepto里源码][7]
+    - CSS命名方式转驼峰命名方式
+    ```js
+    var camelize = function(str){ return str.replace(/-+(.)?/g, function(match, chr){ return chr ? chr.toUpperCase() : '' }) }
+    camelize('font-size')  // "fontSize"
+    ```
+    - 驼峰转CSS命名方式
+    ```js
+    function dasherize(str) {
+      return str.replace(/::/g, '/')
+             .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+             .replace(/([a-z\d])([A-Z])/g, '$1_$2')
+             .replace(/_/g, '-')
+             .toLowerCase()
+    }
+    dasherize('fontSize')  // "font-size"
+    ```
+
+- 数组去重
+    - 使用filter，zepto里使用的方法
+        ```js
+        var uniq = function(array){
+            return [].filter.call(array, function(item, idx){ return array.indexOf(item) == idx })
+        }
+        uniq([1,2,3,3]) //[1, 2, 3]
+        ```
+    - [使用es6里的set][6]
+        ```js
+        [...new Set(array)]
+        ```
+
+- [类型判断][5]
+
+    ```js
+    //数组类型判断
+    var isArray = function(obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+    }
+
+    isArray([]) // true
+
+    //类型判断
+    var is = function (obj,type) {
+        return (type === "Null" && obj === null) ||
+        (type === "Undefined" && obj === void 0 ) ||
+        (type === "Number" && isFinite(obj)) ||
+        Object.prototype.toString.call(obj).slice(8,-1) === type;
+    }
+
+    is([], "Array")
+    is({}, "Object")
+    is(null, "Null")
+    is(undefined, 'Undefined')
+    is(function(){}, 'Function')
+    is('','String')
+    is(2,'Number')
+    //以上均为true
+    ```
 - cookie操作
 
     ```javascript
@@ -80,26 +138,37 @@
     }
     ```
 
-- [js 判断IOS, 安卓][1]
+- [js 判断IOS, 安卓][1],[浏览器类型判断][8]
 
     ```javascript
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
-    var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-
-    alert('是否是Android：' + isAndroid);
-    alert('是否是iOS：' + isiOS);
-    ```
-
-- [js判断微信客户端][2]
-
-    ```javascript
-    // Mozilla/5.0 (iPhone; CPU iPhone OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Mobile/12F70 MicroMessenger/6.1.5 NetType/WIFI
-    function isWechat() {  
-        var ua = navigator.userAgent.toLowerCase();
-        return /micromessenger/i.test(ua) || /windows phone/i.test(ua);
-    }
+    var ua = navigator.userAgent  // "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36"
+    var platform = navigator.platform
+    var webkit = ua.match(/Web[kK]it[\/]{0,1}([\d.]+)/),
+        android = ua.match(/(Android);?[\s\/]+([\d.]+)?/),
+        osx = !!ua.match(/\(Macintosh\; Intel /),
+        ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+        ipod = ua.match(/(iPod)(.*OS\s([\d_]+))?/),
+        iphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+        webos = ua.match(/(webOS|hpwOS)[\s\/]([\d.]+)/),
+        win = /Win\d{2}|Windows/.test(platform),
+        wp = ua.match(/Windows Phone ([\d.]+)/),
+        touchpad = webos && ua.match(/TouchPad/),
+        kindle = ua.match(/Kindle\/([\d.]+)/),
+        silk = ua.match(/Silk\/([\d._]+)/),
+        blackberry = ua.match(/(BlackBerry).*Version\/([\d.]+)/),
+        bb10 = ua.match(/(BB10).*Version\/([\d.]+)/),
+        rimtabletos = ua.match(/(RIM\sTablet\sOS)\s([\d.]+)/),
+        playbook = ua.match(/PlayBook/),
+        chrome = ua.match(/Chrome\/([\d.]+)/) || ua.match(/CriOS\/([\d.]+)/),
+        firefox = ua.match(/Firefox\/([\d.]+)/),
+        firefoxos = ua.match(/\((?:Mobile|Tablet); rv:([\d.]+)\).*Firefox\/[\d.]+/),
+        ie = ua.match(/MSIE\s([\d.]+)/) || ua.match(/Trident\/[\d](?=[^\?]+).*rv:([0-9.].)/),
+        webview = !chrome && ua.match(/(iPhone|iPod|iPad).*AppleWebKit(?!.*Safari)/),
+        safari = webview || ua.match(/Version\/([\d.]+)([^S](Safari)|[^M]*(Mobile)[^S]*(Safari))/),
+        mobile= !!ua.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios= !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        weixin= ua.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+        qq= ua.match(/\sQQ/i) == " qq" //是否QQ
     ```
 
 - 得到地理位置
@@ -286,3 +355,7 @@
 [2]: http://loo2k.com/blog/detecting-wechat-client/
 [3]: http://www.html-js.com/article/3041
 [4]: https://www.npmjs.com/package/px2rem
+[5]: http://www.jb51.net/article/28737.htm
+[6]: http://es6.ruanyifeng.com/#docs/set-map
+[7]: ./learnZepto.md
+[8]: http://www.cnblogs.com/bergwhite/p/7436583.html
