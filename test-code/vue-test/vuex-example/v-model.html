@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <p>{{msg}}</p>
+    <input v-model="msg" type="text"/>
+
+</div>
+
+<script>
+
+    var store = new Vuex.Store({
+        state:{
+            msg: "hello world"
+        },
+        mutations:{
+            updateMessage: function (state, msg) {
+                state.msg = msg
+            }
+        }
+
+    });
+
+
+    var app = new Vue({
+        el:'#app',
+
+        computed: {
+            msg: {
+                get: function () {
+                    return store.state.msg
+                },
+                set: function (value) {
+                   store.commit('updateMessage', value)
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

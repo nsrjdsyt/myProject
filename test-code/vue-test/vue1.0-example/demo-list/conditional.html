@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <!--//为FALSE时从dom中display:none. v-show 简单得多——元素始终被编译并保留，只是简单地基于 CSS 切换。-->
+    <h1 v-show="ok">show message</h1>
+    <h1 v-else>show else</h1>
+
+
+    <!--//为FALSE时从dom中移除, v-if 是真实的条件渲染，因为它会确保条件块在切换当中合适地销毁与重建条件块内的事件监听器和子组件。-->
+    <!--//v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——在条件第一次变为真时才开始局部编译（编译会被缓存起来）。-->
+
+    <h1 v-if="ok">show message</h1>
+    <h1 v-else>show else</h1>
+
+
+    <!--想切换多个元素呢？此时我们可以把一个 <template> 元素当做包装元素，并在上面使用 v-if，最终的渲染结果不会包含它。-->
+    <template v-if="ok">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            ok: false
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{doneTodosId}}</p>
+</div>
+
+<script>
+    var store = new Vuex.Store({
+        state: {                  //状态
+            todos:[
+                { id: 1, text: 't1', done: true },
+                { id: 2, text: 't2', done: false }
+            ]
+
+        },
+        getters:{                //从 state 中派生出一些新状态, 可以认为是store的计算属性
+            doneTodos: function (state) {
+                return state.todos[1]
+            },
+            doneTodosId: function (state,getters) {
+                return getters.doneTodos.id
+            }
+        },
+        mutations:{             //修改状态的方法，不直接修改state
+            increment: function (state) {
+                state.count++
+            }
+        }
+
+    })
+
+    var app = new Vue({
+        el:'#app',
+//        computed:{
+//            id: function () {
+//                return store.getters.doneTodosId             //在任何组件中使用它getters
+//            }
+//        }
+//or
+//        computed: Vuex.mapGetters(['doneTodosId'])          //mapGetters 辅助函数仅仅是将 store 中的 getters 映射到局部计算属性,mapGetters用法同mapState
+    })
+</script>
+</body>
+</html>

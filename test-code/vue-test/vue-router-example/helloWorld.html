@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <a v-link="{path:'/foo'}">foo</a>
+        <a v-link="{path:'/bar'}">bar</a>
+    </p>
+    <router-view></router-view>
+</div>
+
+<script>
+    var Foo = {
+        template:"<div>foo content</div>"
+    }
+
+    var Bar = {
+        template:"<div>bar content</div>"
+    }
+
+    var router = new VueRouter()
+    router.map({
+        '/foo':{
+            component:Foo
+        },
+        '/bar': {
+            component:Bar
+        }
+    })
+
+    var App = {};
+
+    router.start(App, '#app');
+
+    router.redirect({
+        '*': '/foo'
+    })
+</script>
+</body>
+</html>

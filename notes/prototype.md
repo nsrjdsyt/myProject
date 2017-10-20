@@ -1,0 +1,1 @@
+#prototype和__proto__笔记

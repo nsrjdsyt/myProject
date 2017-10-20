@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+
+<template id="child2-template">
+    <input v-model="message"/>
+    <button @click="notify">Dispatch Event</button>
+</template>
+
+<div id="events-example">
+    <p> messages: {{ messages | json }}</p>
+    <!--方法1 -->
+    <!--<child2></child2>-->
+
+    <!--方法 2  ： 子组件自定义事件child-msg，子组件触发事件child-msg，影响父组件状态的代码 放在父组件的method handleIt里-->
+    <child2 v-on:child-msg="handleIt" v-ref:child2></child2>   <!--使用 v-ref 为子组件指定一个索引 ID， 可以使用js 父组件直接访问子组件-->
+</div>
+
+
+<script>
+///////////////////////自定义事件///////////////////////////////
+
+    Vue.component('child2', {
+        template: '#child2-template',
+        data: function () {
+            return {
+                message: "hello child"
+            }
+        },
+        methods: {
+            notify: function () {
+                if (this.message.trim()) {
+//方法1                   this.$dispatch('child-msg', this.message)  //使用 $dispatch() 派发事件，事件沿着父链冒泡；
+
+//方法2
+                    this.$emit('child-msg', this.message)   //使用 $emit() 在它上面触发事件；子组件只关心触发事件
+                    this.message = ''
+                }
+            }
+        }
+    })
+
+    var parent = new Vue({
+        el: '#events-example',
+        data: {
+            messages: []
+        },
+
+//        方法1
+//        events:{
+//            'child-msg': function (message) {
+//                this.messages.push(message)
+//            }
+//        },
+        methods: {
+
+//          方法2
+            handleIt: function (message) {
+                // 事件回调内的 `this` 自动绑定到注册它的实例上
+                this.messages.push(message)
+                console.log(message)
+            }
+        }
+    })
+
+
+    console.log(parent.$refs, parent.$refs.child2) //vue实例
+
+
+
+////////////////////////////////监听当前实例上的自定义事件/////////////////////////////////////////////
+
+
+//    监听当前实例上的自定义事件。事件可以由 vm.$emit, vm.$dispatch 或 vm.$broadcast触发。传入这些方法的附加参数都会传入这个方法的回调。
+    parent.$on('test', function (msg) {
+        console.log(msg,'parent')
+    })
+
+    parent.$refs.child2.$on("test", function (mm) {
+        console.log(mm,'child');
+    })
+
+
+
+    parent.$emit('test', 'emit') //触发当前实例上的事件。附加参数都会传给监听器回调。
+    // --> emit parent
+
+    parent.$refs.child2.$dispatch('test','dispatch');  //派发事件，首先 在实例上触发它，然后沿着父链向上冒泡在触发一个监听器后停止，除非它返回 true。附加参数都会传给监听器回调。
+    //--> dispatch child
+    //--> dispatch parent
+
+    parent.$broadcast('test','broadcast');  //广播事件，通知给 当前实例的全部后代  。因为后代有多个枝杈，事件将沿着各“路径”通知。每条路径上的通知在触发一个监听器后停止，除非它返回 true。
+    //--> broadcast child
+
+</script>
+</body>
+</html>

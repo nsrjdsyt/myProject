@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>show message</h1>
+
+    <!--变异方法，如名字所示，修改了原始数组, 视图及时生效-->
+        <!--push()-->
+        <!--pop()-->
+        <!--shift()-->
+        <!--unshift()-->
+        <!--splice()-->
+        <!--sort()-->
+        <!--reverse()-->
+
+    <!--也有非变异方法，方法返回新的数组，原视图不改变，在使用非变异方法时，可以直接用新数组替换旧数组-->
+    <!--如 filter(), concat() 和 slice()，不会修改原始数组而是返回一个新数组。-->
+
+
+    <ul >
+        <li v-for="item in list" track-by="$index">{{$index}}:{{item.text}}</li>  <!--v-for放在要重复显示的元素上-->
+    </ul>
+
+
+    no track by
+    <ul >
+        <li v-for="item in list" >{{$index}}:{{item.text}}</li>  <!--v-for放在要重复显示的元素上-->
+    </ul>
+    <!--<ul >-->
+        <!--<li v-for="(index,item) in list">{{index}},{{$index}}:{{item.text}}</li>  &lt;!&ndash;v-for放在要重复显示的元素上&ndash;&gt;-->
+    <!--</ul>-->
+
+    <!--<ul >-->
+        <!--<li v-for="(index,item) of list">{{index}},{{$index}}:{{item.text}}</li>  &lt;!&ndash;v-for放在要重复显示的元素上&ndash;&gt;-->
+    <!--</ul>-->
+
+    <!--<ul>-->
+        <!--<template v-for="item in list">-->
+            <!--<li>{{ item.text }}</li>-->
+            <!--<li class="divider"></li>-->
+        <!--</template>-->
+    <!--</ul>-->
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message: 'hello world',
+            list:[
+                { text: '1 Learn JavaScript' },
+                { text: '2 Learn Vue.js' },
+                { text: '3 Build Something Awesome' }
+            ]
+        }
+    });
+
+    var item = {text: '0 Learn JavaScript'};
+    var item4 = {text: '4 new Learn JavaScript'};
+    var item5 = {text: '5 new Learn JavaScript'};
+    app.list.$set(0,item)
+//
+//    console.log(app.list.indexOf(item))
+//    console.log(app.list.$remove(item))
+
+//    setTimeout(function () {
+//        app.list.push(item4, item5);
+//        app.list.$remove(0, item);
+//    },5000)
+</script>
+</body>
+</html>

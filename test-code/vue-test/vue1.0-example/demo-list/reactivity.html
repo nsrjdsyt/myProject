@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    /
+    {{b}}
+    /
+    {{someObject.d}}
+</div>
+
+<script>
+    // 创建根实例
+    var app = new Vue({
+        el:'#app',
+        data:{
+            b: false,
+            message: 'hello world',
+            someObject:{
+                a:1,
+                b:2
+            }
+        },
+        methods:{
+            showMessage:function(){
+                this.message= this.message.split('').reverse().join('')
+                Vue.set(this,'b',true)
+            }
+        },
+        mounted: function () {
+            Vue.set(this,'b',1)
+        }
+    });
+
+//    在实例创建之后添加属性并且让它是响应的
+//    Vue.set(app,'b',1)
+    Vue.set(app.someObject,'c',3);
+
+    app.someObject = Object.assign({},app.someObject,{'d':4});
+
+    console.log(app);
+
+    app.message = 'new message';
+
+    app.showMessage();
+
+    console.log(app.$el.textContent !== 'new message')
+
+//    为了在数据变化之后等待 Vue.js 完成更新 DOM，可以在数据变化之后立即使用 Vue.nextTick(callback) 。回调在 DOM 更新完成后调用。
+    Vue.nextTick(function () {
+        console.log(app.$el.textContent === 'new message')
+    })
+</script>
+</body>
+</html>

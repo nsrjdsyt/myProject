@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>show a</h1>
+    {{a}},{{b}}
+
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            a: 1,
+            c:3
+
+        },
+        computed:{
+            b: function () { //这里我们声明了一个计算属性 b。我们提供的函数将用作属性 vm.b的 getter
+                return this.a+1
+            },
+            fullName:{
+                get:function(){
+                    return 1;
+                },
+                set:function(){
+                    this.a=10;
+                }
+            }
+        }
+
+    });
+
+    app.$watch('a', function (newVal,oldVal) {
+        this.c += newVal;
+        console.log(newVal,oldVal)
+    })
+</script>
+</body>
+</html>

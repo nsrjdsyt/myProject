@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{c1}}  {{c2}}  {{c3}} {{c4}}</p>
+
+    <button @click="increment">+</button>
+
+</div>
+
+<script>
+
+    var myPlugin = function (store) {
+        store.subscribe(function (mutation, state) {
+            console.log(mutation, state)
+        })
+    }
+
+    var store = new Vuex.Store({
+        state:{
+            c1:1
+        },
+        mutations:{
+            increment: function (state) {
+                console.log("A",state.c1)
+            }
+        },
+        actions:{
+            increment: function (context) {
+//                console.log("A actions")
+                context.commit("increment")
+            }
+        },
+        plugins: [myPlugin]
+    });
+
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            c4:4
+        },
+        computed: {
+            c1: function () {
+//                console.log("computed c1")
+                return 1;
+//                return store.state.a.c1
+            }
+        },
+        methods:{
+            increment:function(){
+                store.commit('increment')
+            }
+        }
+    })
+</script>
+</body>
+</html>

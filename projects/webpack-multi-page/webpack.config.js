@@ -6,7 +6,7 @@ module.exports = {
     entry: {
         index: './src/pages/index/main.js',
         test: './src/pages/test/main.js',
-        common: './src/pages/common/constant.js'
+        common: './src/pages/common/js/constant.js'
     },
     output: {
         path: path.resolve(__dirname, './dist'),
@@ -29,14 +29,6 @@ module.exports = {
                   fallback: "style-loader",
                   use: "css-loader"
                 })
-                // use: [
-                //     {
-                //         loader: 'style-loader'
-                //     }, //注意先后顺序，一般都要先用css-loader处理完然后用style-loader生成style标签,但webpack读取的顺序是从右到左
-                //     {
-                //         loader: 'css-loader'
-                //     }
-                // ]
             }, {
                 test: /\.scss$/,
                 include: path.resolve(__dirname, 'src'),
@@ -45,17 +37,6 @@ module.exports = {
                   fallback: 'style-loader',
                   use: ['css-loader', "postcss-loader", 'sass-loader']
                 })
-                // use: [
-                //     {
-                //         loader: "style-loader"
-                //     }, {
-                //         loader: "css-loader"
-                //     }, {
-                //         loader: "postcss-loader"
-                //     }, {
-                //         loader: "sass-loader"
-                //     }
-                // ]
             }, {
                 test: /\.tpl$/,
                 include: path.resolve(__dirname, 'src'),

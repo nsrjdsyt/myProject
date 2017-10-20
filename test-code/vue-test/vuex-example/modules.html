@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{c1}}  {{c2}}  {{c3}} {{c4}}</p>
+
+    <button @click="increment">+</button>
+
+    <!--<child-count></child-count>-->
+</div>
+
+<script>
+    //    Vuex 允许我们将 store 分割到模块（module）。每个模块拥有自己的 state、mutation、action、getters、甚至是嵌套子模块——从上至下进行类似的分割
+
+
+    var moduleA = {
+        state:{
+            c1:1
+        },
+        mutations:{
+            increment: function (state) {
+//                console.log("A",state.c1)
+            }
+        },
+        actions:{
+            increment: function (context) {
+//                console.log("A actions")
+//                console.log('rootState:',context.rootState)
+                context.commit("increment")
+            }
+        },
+        getters:{
+            doubleC: function (state, getter, rootState) {
+
+                return state.c1*2 + rootState.c3
+            }
+        }
+    }
+
+    var moduleB = {
+        state:{
+            c2:2
+        },
+        mutations:{
+            increment: function (state) {
+//                console.log('B',state.c2)
+            }
+        },
+        actions:{
+            increment: function (context) {
+//                console.log("B actions")
+                context.commit("increment")
+            }
+        }
+    }
+
+
+
+    var store = new Vuex.Store({
+        modules:{
+            b:moduleB,
+            a:moduleA
+        }
+    });
+    //
+    //    console.log(store.state.a.c1)
+    //    console.log(store)
+
+
+    //  store.registerModule 方法动态注册模块，可以使用 store.unregisterModule(moduleName) 动态地卸载模块
+    store.registerModule('myModule',{
+        state:{
+            myModuleCount:3
+        },
+        mutations:{
+            increment: function (state) {
+//                console.log('myModule',state.myModuleCount)
+            }
+        },
+        actions:{
+            increment: function (context) {
+//                console.log("myModule actions")
+                context.commit("increment")
+            }
+        }
+    })
+
+    //    console.log(store.state.myModule)
+    //
+    //    store.dispatch('increment')  //A B  myModule 的action都会执行,顺序按照模块module注册顺序
+    //
+    //
+    //    store.unregisterModule('myModule')
+    //
+    //
+    //    store.unregisterModule('a') //报错       注意，你不能使用此方法卸载静态模块（在创建 store 时声明的模块）
+    //
+    //    store.commit('increment')
+
+
+
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            c4:4
+        },
+        computed: {
+            c1: function () {
+                console.log("computed c1")
+                return store.state.a.c1
+            }
+        },
+//        computed: Vuex.mapState({
+//            c1:'c1',
+//            c2:'c2',
+//            c3:'c3'
+//        }),
+        methods:{
+            increment:function(){
+                store.commit('increment')
+            }
+        }
+    })
+</script>
+</body>
+</html>

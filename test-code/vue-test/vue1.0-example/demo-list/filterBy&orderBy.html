@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <!--'text' 'phone' 在多个属性中搜索，其中一个搜索到就为TRUE-->
+    <input v-model="name">
+    <ul >
+        <li v-for="item in list | filterBy name in 'text' 'phone'" track-by="$index" >{{$index}}:{{item.text}}</li>  <!--v-for放在要重复显示的元素上-->
+    </ul>
+
+    <ul >
+        <li v-for="item in list | filterBy name in 'text' " track-by="$index" >{{$index}}:{{item.text}}</li>  <!--v-for放在要重复显示的元素上-->
+    </ul>
+
+
+    <ul >
+        <li v-for="item in list | orderBy 'phone'" track-by="$index" >{{$index}}:{{item.text}}</li>  <!--v-for放在要重复显示的元素上-->
+    </ul>
+
+
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            name: 'hello world',
+            list:[
+                {
+                    text: '1 Learn JavaScript',
+                    phone: 'phone 11 JavaScript'
+                },
+                { text: '2 Learn Vue.js',phone: 'phone Vue'    },
+                { text: '3 Build Something Awesome',phone: 'Awesome'    }
+            ]
+        }
+    });
+
+
+</script>
+</body>
+</html>

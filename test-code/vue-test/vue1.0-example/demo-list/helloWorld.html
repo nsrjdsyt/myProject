@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>show message</h1>
+    {{message}}
+    <input  v-model="message" type="text" class="{{message}}"/>
+
+    <ul v-for="item in list">
+        <li>{{$index}}:{{item.text}}</li>
+    </ul>
+
+    <button v-on:click="showMessage" >click me</button>
+
+    <h1>add todos</h1>
+    <p>
+        <input v-model="newTodo" v-on:keyup.enter="addTodo">
+        <ul>
+            <li v-for="todo in todos">
+                <span>{{ todo.text }}</span>
+                <button v-on:click="removeTodo($index)">X</button>
+            </li>
+        </ul>
+    </p>
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message: 'hello world',
+            list:[
+                { text: 'Learn JavaScript' },
+                { text: 'Learn Vue.js' },
+                { text: 'Build Something Awesome' }
+            ],
+            newTodo: '',
+            todos: [
+                { text: 'Add some todos' }
+            ]
+        },
+        methods:{
+            showMessage:function(){
+               this.message= this.message.split('').reverse().join('')
+            },
+            addTodo: function () {
+                var text = this.newTodo.trim()
+                if (text) {
+                    this.todos.push({ text: text })
+                    this.newTodo = ''
+                }
+            },
+            removeTodo: function (index) {
+                this.todos.splice(index, 1)
+            }
+        }
+    })
+</script>
+</body>
+</html>

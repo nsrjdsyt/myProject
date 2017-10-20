@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{count}} {{obj.a}} {{myCount}}</p>
+
+    <button @click="increment">+</button>
+
+    <!--<child-count></child-count>-->
+</div>
+
+<script>
+    var store = new Vuex.Store({
+        state: {
+            count:1,
+            obj: {
+                a:'a',
+                b:"b"
+            }
+        },
+        mutations:{  //修改状态的方法，不直接修改state
+            increment: function (state) {
+                state.count++
+            }
+        }
+    })
+
+    var app = new Vue({
+        el:'#app',
+        data:{        //如果有些状态严格属于单个组件，最好还是作为组件的局部状态。
+          myCount: 100
+        },
+        store: store, //把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+// 1
+//        computed:Vuex.mapState({              mapState参数可接受对象和数组，返回的是一个对象
+////            count: function (state) {
+////                return state.count
+////            },
+//
+//2 or
+//            count: 'count'
+//
+//        }),
+//
+//3 or
+        computed:Vuex.mapState(['count','obj']),
+
+//也可能组件自身有计算属性，需要合并
+        methods:{
+            increment:function(){
+                store.commit('increment')   // store.commit 方法触发状态变更
+            }
+        },
+        components:{
+            childCount:{
+                template:"<div> child {{count }}</div><button @click='childIncrement'>child +</button>",
+                computed:{
+                    count: function () {
+                        return store.state.count
+                    }
+                },
+                methods:{
+                    childIncrement: function () {
+                        store.commit('increment')
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

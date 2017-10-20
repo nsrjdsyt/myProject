@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{message | reverse 1 2}}
+
+
+        <input v-model="currency | currencyDisplay" type="text" number/>
+        {{currency}}
+
+        <br>
+
+        <input v-model="userInput">
+        <span>{{message | concat userInput}}</span>
+        <span>{{message + userInput}}</span>
+    </div>
+
+
+    <script>
+
+//        使用过滤器都是在把来自模型的值显示在视图之前转换它
+        Vue.filter('reverse', function (value , begin ,end) {
+            return value.split('').reverse().join('') + begin + end
+        });
+
+//      也可以定义一个过滤器，在把来自视图（<input> 元素）的值写回模型之前转化它
+        Vue.filter('currencyDisplay',{
+            // model -> view
+            // 在更新 `<input>` 元素之前格式化值
+            read: function (val) {
+                return '$' + val.toFixed(2)
+            },
+            // view -> model
+            // 在写回数据之前格式化值
+            write: function (val,oldVal) {
+                var number = +val.replace(/[^\d.]/g, '')
+                return isNaN(number) ? 0 : parseFloat(number.toFixed(2))
+            }
+        })
+
+        Vue.filter('concat', function (value,input) {
+            return value + input
+        })
+
+        // 创建根实例
+        var app = new Vue({
+            el:'#app',
+            data:{
+                message: 'hello world',
+                someObject:{
+                    a:1,
+                    b:2
+                },
+                currency:11,
+                userInput:'input'
+            },
+            methods:{
+                showMessage:function(){
+                    this.message= this.message.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+import "../css/reset.css"
+
 const PRODUCT_TYPE = {           //商品类型
     ITEM: 0,                             //实物
     CARD: 1,                             //卡密

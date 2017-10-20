@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{count}} {{obj.b}}</p>
+
+    <button @click="increment">+</button>
+
+    <!--<child-count></child-count>-->
+</div>
+
+<script>
+    var store = new Vuex.Store({
+        state: {
+            count:1,
+            obj:{
+                a:1
+            }
+        },
+        mutations:{  //修改状态的方法，不直接修改state，mutation 必须是同步函数，Mutations 需遵守 Vue 的响应规则
+//            increment: function (state, n) {  //接受 state 作为第一个参数
+//                n = isNaN(n) ? 1 : n;
+//                state.count+=n
+//            },
+            increment: function (state, payload) {//事件类型increment 最好用常量作为函数名INCREMENT  //接受 state 作为第一个参数
+
+                n = isNaN(payload.n) ? 1 : payload.n;
+                state.count+=n
+
+                Vue.set(state.obj, 'b' ,2)
+            }
+        }
+    });
+
+
+
+    var app = new Vue({
+        el:'#app',
+        store: store, //把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+        computed:Vuex.mapState(['count','obj']),
+        methods:{
+            increment:function(){
+
+//                store.commit('increment',10)   // store.commit 方法触发状态变更
+
+                //载荷是一个对象的情况
+//                store.commit('increment',{
+//                    n: 10
+//                })
+
+                //载荷是一个对象的情况,整个对象都作为载荷传给 mutation 函数
+                store.commit({
+                    type:'increment',
+                    n: 10
+                })
+
+            }
+        },
+
+//or
+//        methods:Vuex.mapMutations(['increment']),   //使用 mapMutations 辅助函数将组件中的 methods 映射为 store.commit 调用（需要在根节点注入 store）。
+        components:{
+            childCount:{
+                template:"<div> child {{count }}</div><button @click='childIncrement'>child +</button>",
+                computed:{
+                    count: function () {
+                        return store.state.count
+                    }
+                },
+                methods:{
+                    childIncrement: function () {
+                        store.commit('increment')
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

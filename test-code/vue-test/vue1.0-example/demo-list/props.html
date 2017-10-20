@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{parentMsg}}
+    <br>
+    <child message="hello"></child>
+    <br>
+    <child :message="parentMsg"></child> <!--动态绑定,默认为单向绑定--> <br>
+    sync:
+    <child :message.sync="parentMsg"></child> <!--双向绑定: 子组件修改了message 会同步回父组件的 parentMsg 属性--> <br>
+
+    once:
+    <child :message.once="parentMsg"></child> <!--单次绑定,单次绑定在建立之后不会同步父组件属性之后的变化-->
+
+
+    changeParentMsg:
+    <button @click="changeParentMsg">changeParentMsg</button>
+</div>
+
+<script>
+    //    组件实例的作用域是孤立的。这意味着不能并且不应该在子组件的模板内直接引用父组件的数据。可以使用 props 把数据传给子组件。
+    //    注意如果 prop 是一个对象或数组，是按引用传递。在子组件内修改它会影响父组件的状态，不管是使用哪种绑定类型。
+    //    “prop” 是组件数据的一个字段，期望从父组件传下来。子组件需要显式地用 props 选项 声明 props：
+    Vue.component('child', {
+        template: '<p><span>{{ message }}</span> <button @click="changeMessage">changeMessage</button></p>',
+        methods: {
+            changeMessage: function () {
+                this.message = '11'
+            }
+        },
+        //props:['message'],
+        //或者带验证的props
+        props: {
+            message: null,
+            // 基础类型检测 （`null` 意思是任何类型都可以）
+//            propA: Number,
+//            // 多种类型 (1.0.21+)
+//            propM: [String, Number],
+//            // 必需且是字符串
+//            propB: {
+//                type: String,
+//                required: true
+//            },
+//            // 数字，有默认值
+//            propC: {
+//                type: Number,
+//                default: 100
+//            },
+//            // 对象/数组的默认值应当由一个函数返回
+//            propD: {
+//                type: Object,
+//                default: function () {
+//                    return {msg: 'hello'}
+//                }
+//            },
+//            // 指定这个 prop 为双向绑定
+//            // 如果绑定类型不对将抛出一条警告
+//            propE: {
+//                twoWay: true
+//            },
+//            // 自定义验证函数
+//            propF: {
+//                validator: function (value) {
+//                    return value > 10
+//                }
+//            },
+//            // 转换函数（1.0.12 新增）
+//            // 在设置值之前转换值
+//            propG: {
+//                coerce: function (val) {
+//                    return val + '' // 将值转换为字符串
+//                }
+//            },
+//            propH: {
+//                coerce: function (val) {
+//                    return JSON.parse(val) // 将 JSON 字符串转换为对象
+//                }
+//            }
+        }
+    })
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hello world',
+            list: [
+                {text: 'Learn JavaScript'},
+                {text: 'Learn Vue.js'},
+                {text: 'Build Something Awesome'}
+            ],
+            parentMsg: "i am parentMsg"
+        },
+        methods: {
+            showMessage: function () {
+                this.message = this.message.split('').reverse().join('')
+            },
+            changeParentMsg: function () {
+                this.parentMsg = '22'
+            }
+        }
+    })
+</script>
+</body>
+</html>

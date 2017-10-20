@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <a v-link="{path:'/foo'}">foo</a>
+        <a v-link="{path:'/bar', name:'bbbb', params:{userId:1} }">bar</a>
+        <a v-link="{ path: '/foo/a' }">Go to /foo/a</a>
+        <a v-link="{ path: '/foo/b' }">Go to /foo/b</a>
+    </p>
+    <router-view></router-view>
+</div>
+
+<script>
+    var Foo = {
+        template:"<div>" +
+        "<h1>foo content </h1>" +
+        "<p>path:{{$route.path}},   params:{{$route.params | json}}</p>" +
+        "<p>query:{{$route.query | json}},   router:{{$route.router}}</p>" +
+        "<p>matched:{{$route.matched | json}},   name:{{$route.name}}</p>" +
+        "<div><router-view></router-view> </div>" +
+        "</div>"
+    }
+
+    var Bar = {
+        template:"<div>bar content {{$route.params | json}}</div>"
+    }
+
+    var router = new VueRouter({
+        hashbang:false
+    })
+    router.map({
+        '/foo':{
+            component:Foo,
+            subRoutes:{
+                "/":{
+                    component:{
+                        template:"<div>default</div>"
+                    }
+                },
+                "/a":{
+                    component:{
+                        template:"<div>a</div>"
+                    }
+                },
+                "/b":{
+                    component:{
+                        template:"<div>b</div>"
+                    }
+                }
+            }
+        },
+        '/bar/:userId': {
+            name:'bbbb',
+            component:Bar
+        },
+        '/ee/:userId': {
+            name:'bbbb',
+            component:Foo
+        }
+    })
+
+    var App = {}
+
+    router.start(App, '#app')
+</script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+    <style>
+         /*必需 */
+        .expand-transition {
+            transition: all 3s ease;
+            height: 30px;
+            padding: 10px;
+            background-color: #eee;
+            overflow: hidden;
+        }
+        /* .expand-enter 定义进入的开始状态 */
+        /* .expand-leave 定义离开的结束状态 */
+         /* 初始渲染时无动画，修改show值时 有动画：app.show=false*/
+        .expand-enter, .expand-leave {
+            height: 0;
+            padding: 0 10px;
+            opacity: 0;
+        }
+
+         .bounce-transition {
+             display: inline-block; /* 否则 scale 动画不起作用 */
+         }
+         .bounce-enter {
+             animation: bounce-in .5s;
+         }
+         .bounce-leave {
+             animation: bounce-out .5s;
+         }
+         @keyframes bounce-in {
+             0% {
+                 transform: scale(0);
+             }
+             50% {
+                 transform: scale(1.5);
+             }
+             100% {
+                 transform: scale(1);
+             }
+         }
+         @keyframes bounce-out {
+             0% {
+                 transform: scale(1);
+             }
+             50% {
+                 transform: scale(1.5);
+             }
+             100% {
+                 transform: scale(0);
+             }
+         }
+
+         ul {
+             padding-left: 0;
+             font-family: Helvetica, Arial, sans-serif;
+         }
+         .staggered-transition {
+             transition: all .5s ease;
+             overflow: hidden;
+             margin: 0;
+             height: 20px;
+         }
+         .staggered-enter, .staggered-leave {
+             opacity: 0;
+             height: 0;
+         }
+    </style>
+</head>
+<body>
+<div id="app">
+    <h1>show message</h1>
+    <p v-if="show" transition="expand">{{message}}</p>
+
+    <ul v-for="item in list" transition="stagger" stagger="100">
+        <li>{{$index}}:{{item.text}}</li>
+    </ul>
+
+    <!--你可以在同一元素上通过动态绑定实现不同的过渡,transitionName为变量-->
+    <div v-if="show" :transition="transitionName">hello</div>
+    <button v-on:click="showMessage">click me</button>
+
+
+
+    <span v-show="show" transition="bounce">Look at me!</span>
+
+
+    <div id="demo">
+        <input v-model="query">
+        <ul>
+            <li v-for="item in list | filterBy query"
+                transition="staggered"
+                stagger="100">
+                {{item.text}}
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message: 'hello world',
+            list:[
+                { text: 'Bruce Lee' },
+                { text: 'Jackie Chan' },
+                { text: 'Chuck Norris' }
+            ],
+            show:true,
+            transitionName: 'expand',
+            query: '',
+        },
+        methods:{
+            showMessage:function(){
+                this.message= this.message.split('').reverse().join('')
+
+                console.log(this.$el)
+            }
+        }
+    });
+
+//    JavaScript 钩子
+    Vue.transition('expand', {
+        beforeEnter: function (el) {
+//            el为当前添加动画的dom元素
+
+//            this 均指向其所属的 Vue 实例。编译规则：过渡在哪个上下文中编译，它的 this 就指向哪个上下文。
+            el.textContent = 'beforeEnter'
+        },
+        enter: function (el) {
+            el.textContent = 'enter'
+        },
+        afterEnter: function (el) {
+            el.textContent = 'afterEnter'
+        },
+        enterCancelled: function (el) {
+            // handle cancellation
+        },
+        beforeLeave: function (el) {
+            el.textContent = 'beforeLeave'
+        },
+        leave: function (el) {
+            el.textContent = 'leave'
+        },
+        afterLeave: function (el) {
+            el.textContent = 'afterLeave'
+        },
+        leaveCancelled: function (el) {
+            // handle cancellation
+        }
+    });
+
+//    一个钩子 stagger
+//    Vue.transition('stagger',{
+//        stagger:function (index){
+//            return Math.min(300, index*50)
+//        }
+//    })
+</script>
+</body>
+</html>

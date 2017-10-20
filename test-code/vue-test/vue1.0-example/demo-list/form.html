@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>show message</h1>
+    {{message}}
+    <input  v-model="message" type="text"/>
+
+    <textarea v-model="message"></textarea>
+    <br/>
+
+    <input type="checkbox" name="chk" v-model="checked"/>{{checked}}
+    <br/>
+
+    <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+    <label for="jack">Jack</label>
+    <input type="checkbox" id="john" value="John" v-model="checkedNames">
+    <label for="john">John</label>
+    <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+    <label for="mike">Mike</label>
+    <br>
+    <span>Checked names: {{ checkedNames | json }}</span>
+
+    <br/>
+
+    <input type="radio" id="one" value="One" v-model="radio">
+    <label for="one">One</label>
+    <br>
+    <input type="radio" id="two" value="Two" v-model="radio">
+    <label for="two">Two</label>
+    <br>
+    <span>Picked: {{ picked }}</span>
+
+
+    <select v-model="s">
+        <option selected>A</option>
+        <!--<option value="A">A</option>-->
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </select>
+    <span>Selected: {{ s }}</span>
+
+
+    <select v-model="selected" multiple>
+        <!--<option selected>X</option> selected 选择的值优先级高于初始数组里的值-->
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </select>
+    <br>
+    <span>Selected: {{ selected | json }}</span>
+
+    <br>
+    <select v-model="s">
+        <option v-for="option in options" v-bind:value="option.value">
+            {{ option.text }}
+        </option>
+    </select>
+    <span>Selected: {{ s }}</span>
+
+
+    <br>
+    <!-- 当选中时，`picked` 为字符串 "a" -->
+    <input type="radio" v-model="picked" value="a">
+    <!-- `toggle` 为 true 或 false -->
+    <input type="checkbox" v-model="toggle">
+    <!-- 当选中时，`selected` 为字符串 "abc" -->
+    <select v-model="selected">
+        <option value="abc">ABC</option>
+    </select>
+    <br>
+
+    <!--// 当选中时-->
+    <!--vm.toggle === vm.a-->
+    <!--// 当没有选中时-->
+    <!--vm.toggle === vm.b-->
+    <input
+            type="checkbox"
+            v-model="toggle"
+            v-bind:true-value="a"
+            v-bind:false-value="b">
+    <br>
+
+    <!--// 当选中时-->
+    <!--vm.pick === vm.a-->
+    <input type="radio" v-model="pick" v-bind:value="a">
+    <br>
+    <!--// 当选中时-->
+    <!--typeof vm.selected // -> 'object'-->
+    <!--vm.selected.number // -> 123-->
+    <select v-model="selected">
+        <!-- 对象字面量 -->
+        <option v-bind:value="{ number: 123 }">123</option>
+    </select>
+    <br>
+    <!-- 在 "change" 而不是 "input" 事件中更新 -->
+    <input v-model="message" lazy>
+
+    <br>
+    <!--如果想自动将用户的输入转为 Number 类型（如果原值的转换结果为 NaN 则返回原值），可以添加一个特性 number：-->
+    <input v-model="message" number>
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message: 'hello world',
+            checkedNames:[
+
+            ],
+            newTodo: '',
+            todos: [
+                { text: 'Add some todos' }
+            ],
+            checked:true,
+            radio:'One',
+            s:'A',
+            selected:['A','B'],
+            options: [
+                { text: 'One', value: 'A' },
+                { text: 'Two', value: 'B' },
+                { text: 'Three', value: 'C' }
+            ],
+            toggle:1,
+            a:1,
+            b:2
+        },
+        methods:{
+            showMessage:function(){
+                this.message= this.message.split('').reverse().join('')
+            },
+            addTodo: function () {
+                var text = this.newTodo.trim()
+                if (text) {
+                    this.todos.push({ text: text })
+                    this.newTodo = ''
+                }
+            },
+            removeTodo: function (index) {
+                this.todos.splice(index, 1)
+            }
+        }
+    })
+</script>
+</body>
+</html>

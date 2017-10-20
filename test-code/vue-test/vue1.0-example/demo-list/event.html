@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>show message</h1>
+    {{message}}
+    <input  v-model="message" type="text"/>
+
+
+    <!--$event 不需要直接传，函数里可以直接使用-->
+    <button v-on:click="showMessage">click me no event</button>
+    <button v-on:click="showMessage('hi')">show hi</button>
+
+    <!--事件修饰符：.prevent 与 .stop-->
+    <button v-on:click.prevent="showMessage('hi',$event)">prevent  hi</button>
+    <button v-on:click.stop="showMessage('hi',$event)">stop hi</button>
+
+    <!-- 阻止单击事件冒泡 -->
+    <a v-on:click.stop="doThis"></a>
+    <!-- 提交事件不再重载页面 -->
+    <form v-on:submit.prevent="onSubmit"></form>
+    <!-- 修饰符可以串联 -->
+    <a v-on:click.stop.prevent="doThat" />
+    <!-- 只有修饰符 -->
+    <form v-on:submit.prevent></form>
+
+    <!-- 添加事件侦听器时使用 capture 模式 -->
+    <div v-on:click.capture="doThis">...</div>
+    <!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 -->
+    <div v-on:click.self="doThat">...</div>
+
+
+    <!--在监听键盘事件时，我们经常需要检测 keyCode。Vue.js 允许为 v-on 添加按键修饰符：-->
+    <!-- 只有在 keyCode 是 13 时调用 vm.submit() -->
+    <input v-on:keyup.13="submit">
+    <!-- 同上 -->
+    <input v-on:keyup.enter="submit">
+    <!-- 缩写语法 -->
+    <input @keyup.enter="submit">
+
+
+    <!--全部的按键别名：-->
+
+    <!--enter-->
+    <!--tab-->
+    <!--delete-->
+    <!--esc-->
+    <!--space-->
+    <!--up-->
+    <!--down-->
+    <!--left-->
+    <!--right-->
+
+
+
+    <h1>add todos</h1>
+    <p>
+        <input v-model="newTodo" v-on:keyup.enter="addTodo">
+    <ul>
+        <li v-for="todo in todos">
+            <span>{{ todo.text }}</span>
+            <button v-on:click="removeTodo($index)">X</button>
+        </li>
+    </ul>
+    </p>
+</div>
+
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message: 'hello world',
+            list:[
+                { text: 'Learn JavaScript' },
+                { text: 'Learn Vue.js' },
+                { text: 'Build Something Awesome' }
+            ],
+            newTodo: '',
+            todos: [
+                { text: 'Add some todos' }
+            ]
+        },
+        methods:{
+            showMessage:function(mes){
+                event.preventDefault();  // 现在我们可以访问原生DOM事件对象event
+                if(mes){
+                    alert(mes)
+                }
+                this.message= this.message.split('').reverse().join('')
+
+                alert(event.target.tagName)
+            },
+            addTodo: function () {
+                var text = this.newTodo.trim()
+                if (text) {
+                    this.todos.push({ text: text })
+                    this.newTodo = ''
+                }
+            },
+            removeTodo: function (index) {
+                this.todos.splice(index, 1)
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{count}}</p>
+
+    <button @click="increment">+</button>
+
+    <child-count></child-count>
+</div>
+
+<script>
+
+//    单一状态树
+    var store = new Vuex.Store({
+        state: {
+            count:1
+        },
+        mutations:{  //修改状态的方法，组件不直接修改state
+            increment: function (state) {
+                state.count++
+            }
+        }
+    });
+
+    var app = new Vue({
+        el:'#app',
+        store: store,                      //把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+        computed:{                         //引入store.state  实例为什么使用计算属性？ state的变化同步到实例状态的改变。每当 store.state.count 变化的时候, 都会重新求取计算属性，并且触发更新相关联的 DOM。
+            count: function () {
+
+            //  return store.state.count  //or
+                return this.$store.state.count    //通过 store.state 来获取状态对象
+            }
+        },
+        methods:{
+            increment:function(){
+               store.commit('increment')   // store.commit 方法触发状态变更
+            }
+        },
+        components:{
+            childCount:{
+                template:"<div> child {{count }}</div><button @click='childIncrement'>child +</button>",
+                computed:{
+                    count: function () {
+//                        return store.state.count  //or
+                        return this.$store.state.count
+                    }
+                },
+                methods:{
+                    childIncrement: function () {
+                        store.commit('increment')   //改变 store 中的状态的唯一途径就是显式地提交(commit) mutations
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

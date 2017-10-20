@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+
+<div id="events-example">
+    <my-component>
+        <p>This is some original content</p>
+        <p>This is some more original content</p>
+        <p slot="one">one</p>
+        <p slot="one">one2</p>
+        <p slot="two">two</p>
+    </my-component>
+</div>
+
+<template id="child-template">
+    <div>
+        <h1>This is my component!</h1>
+        <slot>
+            如果没有分发内容则显示我。
+        </slot>
+
+        <slot name="one"></slot>
+        <slot name="two"></slot>
+    </div>
+</template>
+
+<script>
+
+    Vue.component('my-component',{
+        template:'#child-template',
+        data:function(){
+            return {
+                message:"hello child"
+            }
+        }
+    })
+
+    var parent  = new Vue({
+        el:'#events-example',
+        data:{
+            messages:[]
+        }
+    })
+
+</script>
+</body>
+</html>

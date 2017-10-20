@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    {{message}}
+    <my-component></my-component>
+    <my-component3></my-component3>
+    <my-component5></my-component5>
+
+    <parent></parent>
+
+    <ul>
+        <li>li-1</li>
+        <li>li-2</li>
+        <a>aaa</a>
+        <my-component5></my-component5>
+    </ul>
+
+    <table>
+
+        <tbody v-for="item in list">
+        <tr>Even row</tr>
+        <tr>Odd row</tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    //1    局部注册
+    var Child = Vue.extend({ template:'<a>aa</a>' })
+    var Parent = Vue.extend({
+        template: '<my-component></my-component> rrrr',
+        components: {
+            // <my-component> 只能用在父组件模板内
+            'my-component': Child
+        }
+    })
+
+    Vue.component('parent',Parent)
+
+    //2  全局注册
+
+    //    用 Vue.extend() 创建一个组件构造器
+    var myComponent = Vue.extend({
+        template:'<div> a custom component</div>',
+        replace:false  //自定义元素的作用只是作为一个挂载点。replace 决定是否替换。
+    })
+
+    //要把这个构造器用作组件，需要用 Vue.component(tag, constructor) 注册
+    Vue.component('my-component', myComponent);
+
+    //组件在注册之后，便可以在父实例的模块中以自定义元素 <my-component> 的形式使用。
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//    最好使用简洁写法 3 和 4
+    //3   简洁写法
+   Vue.component('my-component3',{
+       template:'<div> a custom component3</div>',
+       replace:false  //自定义元素的作用只是作为一个挂载点。replace 决定是否替换。
+   })
+
+    //4. 局部注册
+    var Parent = Vue.extend({
+        template: '<my-component></my-component> rrrr',
+        components: {
+            // <my-component> 只能用在父组件模板内
+            'my-component4': {
+                template: '<div>A custom component!4</div>'
+            }
+        }
+    })
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    //应当使用一个函数作为 data 选项,   组件实例的作用域是孤立的    el 选项用在 Vue.extend() 中时也须是一个函数
+    var MyComponent = Vue.extend({
+        data: function () {       //组件自身状态 使用data，  非自身数据，父亲传过来的数据用props
+            return { a: 1 }
+        }
+    })
+
+
+    // 创建根实例
+    var app = new Vue({
+        el:'#app',
+        data:{
+            message: 'hello world',
+            list:[
+                { text: 'Learn JavaScript' },
+                { text: 'Learn Vue.js' },
+                { text: 'Build Something Awesome' }
+            ]
+        },
+        methods:{
+            showMessage:function(){
+                this.message= this.message.split('').reverse().join('')
+            }
+        },
+        components: {
+            // <my-component> 只能用在父组件模板内
+            'my-component5': {
+                template: '<div>A custom component!5</div>'
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

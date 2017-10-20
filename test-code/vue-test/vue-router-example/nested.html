@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <a v-link="{path:'/foo'}">foo</a>
+        <a v-link="{path:'/bar'}">bar</a>
+        <a v-link="{ path: '/foo/a' }">Go to /foo/a</a>
+        <a v-link="{ path: '/foo/b' }">Go to /foo/b</a>
+    </p>
+    <router-view></router-view>
+</div>
+
+<script>
+
+    var router = new VueRouter();
+
+    router.map({
+        '/foo':{
+            component:{
+                template:"<div><h1>foo content</h1><div><router-view></router-view> </div></div>"
+            },
+            subRoutes:{
+                // 当匹配到 /foo 时，这个组件会被渲染到 Foo 组件的 <router-view> 中。
+                // 为了简便，这里使用了一个组件的定义
+                "/":{
+                    component:{
+                        template:"<div>default</div>"
+                    }
+                },
+                "/a":{
+                    component:{
+                        template:"<div>a</div>"
+                    }
+                },
+                "/b":{
+                    component:{
+                        template:"<div>b</div>"
+                    }
+                }
+            }
+        },
+        '/bar': {
+            component:{
+                template:"<div>bar content</div>"
+            }
+        }
+    })
+
+    var App = {}
+
+    router.start(App, '#app')
+
+    router.redirect({
+        '*':'/foo/'
+    })
+
+</script>
+</body>
+</html>

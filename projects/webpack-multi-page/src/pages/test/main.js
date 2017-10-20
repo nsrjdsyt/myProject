@@ -1,4 +1,4 @@
-import { PRODUCT_TYPE } from '../common/constant';
+import { PRODUCT_TYPE } from '../common/js/constant';
 
 document.getElementById('content').innerHTML = 'i am test page!';
 

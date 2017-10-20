@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div v-my-directive:hello.a.b="22" a="hi">1111</div>
+    <!--当指令使用了字面修饰符，它的值将按普通字符串处理并传递给 update 方法。update 方法将只调用一次，因为普通字符串不能响应数据变化。-->
+    <div v-demo.literal="foo bar baz">
+</div>
+
+<script>
+
+//    1
+    Vue.directive('my-directive',{
+        params:['a'],
+        bind: function () {
+            // 准备工作
+            // 例如，添加事件处理器或只需要运行一次的高耗任务
+            console.log('bind', this.params.a)
+        },
+        update: function (value,oldVal) {
+            // 值更新时的工作
+            // 也会以初始值为参数调用一次
+            this.el.innerHTML =
+                    'name - '       + this.name + '<br>' +
+                    'expression - ' + this.expression + '<br>' +
+                    'argument - '   + this.arg + '<br>' +
+                    'modifiers - '  + JSON.stringify(this.modifiers) + '<br>' +
+                    'descriptor'    + this.descriptor +'<br>' +
+                    'value - '      + value
+
+        },
+        unbind: function () {
+            // 清理工作
+            // 例如，删除 bind() 添加的事件监听器
+            console.log('unbind')
+        }
+    })
+
+
+    // 2   当只需要 update 函数时，可以传入一个函数替代定义对象：
+    Vue.directive('demo', function (value) {
+        console.log(value) // "foo bar baz"
+    })
+
+
+
+
+    // 创建根实例
+    var app = new Vue({
+        el:'#app'
+    })
+
+
+</script>
+</body>
+</html>

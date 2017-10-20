@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<body>
+<div id="app">
+    <h1>Hello App!</h1>
+    <p>
+        <a v-link="{path:'/foo'}">foo</a>
+        <a v-link="{ path: '/foo/a' }">Go to /foo/a</a>
+        <a v-link="{ path: '/foo/b' }">Go to /foo/b</a>
+
+        <!--给一条路径加上一个名字name属性 能够让我们更方便地进行路径的跳转。-->
+        <a v-link="{path:'/bar/1', params:{userId:1} }">bar-no name</a>
+        <a v-link="{name:'bbbb', params:{userId:1} }">bar-name</a>
+
+    </p>
+    <router-view></router-view>
+</div>
+
+<script>
+
+//    你可以直接在组件模板中使用 $route
+    var Foo = {
+        template:"<div>" +
+        "<h1>foo content </h1>" +
+        "<p>path:{{$route.path}}, <br/>  params:{{$route.params | json}}</p>" +
+        "<p>query:{{$route.query | json}}, <br/>  router:{{$route.router}}</p>" +
+        "<p>matched:{{$route.matched | json}},<br/>   name:{{$route.name}}</p>" +
+        "<div><router-view></router-view> </div>" +
+        "</div>"
+    }
+
+    var Bar = {
+        template:"<div>bar content, userId: {{$route.params.userId}}</div>"
+    }
+
+    var router = new VueRouter()
+    router.map({
+        '/foo':{
+            component:Foo,
+            auth:true,
+            subRoutes:{
+                "/":{
+                    component:{
+                        template:"<div>default</div>"
+                    }
+                },
+                "/a":{
+                    component:{
+                        template:"<div>a</div>"
+                    }
+                },
+                "/b":{
+                    component:{
+                        template:"<div>b</div>"
+                    }
+                }
+            }
+        },
+        '/bar/:userId': {
+            component:Bar
+        },
+        '/ee/:userId': {
+            name:'bbbb',   //覆盖前面同name的路由配置
+            component:Foo
+        }
+    })
+
+    var App = {}
+
+    router.start(App, '#app')
+
+
+//    router.beforeEach(function (transition) {
+//        if(transition.to.path === '/foo/a'){
+//            console.log("a");
+//            console.log(transition.to.auth);
+//            console.log(transition);
+//            return true;
+//        }else{
+//            transition.next();
+//        }
+//    })
+
+
+    router.go({name:'bbbb'})
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+    <script src="../vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <p>{{count}} {{obj.b}}</p>
+
+    <button @click="increment">+</button>
+
+    <!--<child-count></child-count>-->
+</div>
+
+<script>
+    var store = new Vuex.Store({
+        state: {
+            count:1,
+            obj:{
+                a:1
+            }
+        },
+        mutations:{                                    //修改状态的方法，mutation 都是同步事务
+            increment: function (state) {
+                state.count +=10
+            }
+        },
+        actions:{                               //Action 提交的是 mutation，而不是直接变更状态。可以包含任意异步操作。
+            increment: function (context) {     //函数接受一个与 store 实例具有相同方法和属性的 context 对象,通过 context.state 和 context.getters 来获取 state 和 getters
+                context.commit('increment')
+                console.log("inc")
+            },
+            incrementAsync (context) {
+                setTimeout(function () {
+                    context.commit('increment')
+                    console.log("asyncInc")
+                }, 1000)
+            }
+
+//        组合 Actions
+
+        }
+
+    });
+
+
+
+    var app = new Vue({
+        el:'#app',
+        store: store,
+        computed:Vuex.mapState(['count','obj']),
+        methods:{
+            increment:function(){
+
+//                store.commit('increment',10)   // store.commit 方法触发状态变更
+
+                //载荷是一个对象的情况
+//                store.commit('increment',{
+//                    n: 10
+//                })
+
+                //载荷是一个对象的情况,整个对象都作为载荷传给 mutation 函数
+//                store.commit({
+//                    type:'increment',
+//                    n: 10
+//                });
+
+                store.dispatch('incrementAsync')    //Action 通过 store.dispatch 方法触发
+                store.dispatch('increment')
+
+            }
+        },
+
+// or
+//      methods: Vuex.mapActions(['increment'],'incrementAsync'),  //使用 mapActions 辅助函数将组件的 methods 映射为 store.dispatch 调用（需要先在根节点注入 store）：
+        components:{
+            childCount:{
+                template:"<div> child {{count }}</div><button @click='childIncrement'>child +</button>",
+                computed:{
+                    count: function () {
+                        return store.state.count
+                    }
+                },
+                methods:{
+                    childIncrement: function () {
+                        store.commit('increment')
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

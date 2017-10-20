@@ -1,4 +1,4 @@
-import { PRODUCT_TYPE } from '../common/constant';
+import { PRODUCT_TYPE } from '../common/js/constant';
 import M from './module1/m'
 import sass from './main.scss';
 
