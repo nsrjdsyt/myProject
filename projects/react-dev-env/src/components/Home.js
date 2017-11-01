@@ -2,6 +2,8 @@ import React from 'react'
 import {Form, Icon, Input, Button, Checkbox} from 'antd';
 const FormItem = Form.Item;
 
+require('./../styles/home.css')
+
 class Home extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();

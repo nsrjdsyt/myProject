@@ -3,30 +3,29 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 
 import Bundle from '../utils/Bundle'
 
-import Home from 'bundle-loader?lazy&name=home!./Home'
-import About from 'bundle-loader?lazy&name=about!./About'
-import Topics from 'bundle-loader?lazy&name=topics!./Topics'
+import LoadHome from 'bundle-loader?lazy&name=home!./Home'
+import LoadAbout from 'bundle-loader?lazy&name=about!./About'
+import LoadTopics from 'bundle-loader?lazy&name=topics!./Topics'
 
-
-const HomeComponent = (props) => (
-    <Bundle load={Home}>
-        {(Home) => <Home {...props}/>}
+const Home = (props) => (
+    <Bundle load={LoadHome}>
+        {(LoadHome) => <LoadHome {...props}/>}
     </Bundle>
 )
 
-const AboutComponent = (props) => (
-    <Bundle load={About}>
-        {(About) => <About {...props}/>}
+const About = (props) => (
+    <Bundle load={LoadAbout}>
+        {(LoadAbout) => <LoadAbout {...props}/>}
     </Bundle>
 )
 
-const TopicsComponent = (props) => (
-    <Bundle load={Topics}>
-        {(Topics) => <Topics {...props}/>}
+const Topics = (props) => (
+    <Bundle load={LoadTopics}>
+        {(LoadTopics) => <LoadTopics {...props}/>}
     </Bundle>
 )
 
-class BasicExample extends Component{
+class BasicExample extends Component {
 
     render() {
         return (
@@ -46,14 +45,13 @@ class BasicExample extends Component{
 
                     <hr/>
 
-                    <Route exact path="/" component={HomeComponent}/>
-                    <Route path="/about" component={AboutComponent}/>
-                    <Route path="/topics" component={TopicsComponent}/>
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/about" component={About}/>
+                    <Route path="/topics" component={Topics}/>
                 </div>
             </Router>
         )
     }
 }
-
 
 export default BasicExample
