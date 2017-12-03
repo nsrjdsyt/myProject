@@ -95,5 +95,8 @@
     "rules": {
       "import/no-webpack-loader-syntax": 0
     }
+  },
+  "devDependencies": {
+    "classnames": "^2.2.5"
   }
 }
