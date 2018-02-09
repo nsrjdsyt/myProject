@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>容器水平垂直居中</title>
+  <style>
+    .method-1 .wrap {
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      position: relative;
+    }
+
+    .method-1 .wrap .center {
+      width: 100px;
+      height: 100px;
+      background: green;
+      margin: auto;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+
+    .method-2 .wrap {
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .method-2 .wrap .center {
+      width: 100px;
+      height: 100px;
+      background: green;
+      display: inline-block;
+    }
+
+
+    .method-3 .wrap {
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      position: relative;
+    }
+
+    .method-3 .wrap .center {
+      width: 100px;
+      height: 100px;
+      background: green;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .method-4 .wrap {
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .method-4 .wrap .center {
+      width: 100px;
+      height: 100px;
+      background: green;
+    }
+
+
+    .method-5 .wrap {
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      display: flex;
+    }
+
+    .method-5 .wrap .center {
+      width: 100px;
+      height: 100px;
+      background: green;
+      margin: auto;
+    }
+
+
+    .method-6 .wrap {
+      width: 200px;
+      height: 200px;
+      background: yellow;
+      position: relative;
+    }
+
+    .method-6 .wrap .center {
+      width: 100px;
+      height: 100px;
+      background: green;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="method-1">
+    <h2>1. position加margin</h2>
+    <pre>
+        .wrap {
+          width: 200px;
+          height: 200px;
+          background: yellow;
+          position: relative;
+        }
+        .wrap .center {
+          width: 100px;
+          height: 100px;
+          background: green;
+          margin: auto;
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
+      </pre>
+    <div class="wrap">
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="method-2">
+    <h2>2. diaplay:table-cell</h2>
+    <pre>
+        .wrap {
+          width: 200px;
+          height: 200px;
+          background: yellow;
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+        }
+
+       .wrap .center {
+          width: 100px;
+          height: 100px;
+          background: green;
+          display: inline-block;
+        }
+      </pre>
+    <div class="wrap">
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="method-3">
+    <h2>3. position加 transform</h2>
+    <pre>
+        .wrap {
+          width: 200px;
+          height: 200px;
+          background: yellow;
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+        }
+
+       .wrap .center {
+          width: 100px;
+          height: 100px;
+          background: green;
+          display: inline-block;
+        }
+      </pre>
+    <div class="wrap">
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="method-4">
+    <h2>4. flex;align-items: center;justify-content: center</h2>
+    <pre>
+        .wrap {
+          width: 200px;
+          height: 200px;
+          background: yellow;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+       .wrap .center {
+          width: 100px;
+          height: 100px;
+          background: green;
+        }
+      </pre>
+    <div class="wrap">
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="method-5">
+    <h2>5. display:flex;margin:auto</h2>
+    <pre>
+        .wrap {
+            width: 200px;
+            height: 200px;
+            background: yellow;
+            display: flex;
+          }
+
+        .wrap .center {
+            width: 100px;
+            height: 100px;
+            background: green;
+            margin: auto;
+          }
+
+      </pre>
+    <div class="wrap">
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="method-6">
+    <h2>6. position + margin</h2>
+    <pre>
+        .wrap {
+            width: 200px;
+            height: 200px;
+            background: yellow;
+            position: relative;
+          }
+
+        .wrap .center {
+            width: 100px;
+            height: 100px;
+            background: green;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+          }
+      </pre>
+    <div class="wrap">
+      <div class="center"></div>
+    </div>
+  </div>
+
+  <ul>
+    <li>
+      https://zhuanlan.zhihu.com/p/28700051
+    </li>
+    <li>
+      https://zhuanlan.zhihu.com/p/24070633
+    </li>
+    <li>
+      https://zhuanlan.zhihu.com/p/24419350
+    </li>
+  </ul>
+</body>
+
+</html>

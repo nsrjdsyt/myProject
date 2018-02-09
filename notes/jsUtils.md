@@ -1,39 +1,168 @@
 # js 代码片段
 
+- [获取顶层对象][11]
+
+  ```js
+    // 方法一
+    (typeof window !== 'undefined'
+       ? window
+       : (typeof process === 'object' &&
+          typeof require === 'function' &&
+          typeof global === 'object')
+         ? global
+         : this);
+
+    // 方法二
+    var getGlobal = function () {
+      if (typeof self !== 'undefined') { return self; }
+      if (typeof window !== 'undefined') { return window; }
+      if (typeof global !== 'undefined') { return global; }
+      throw new Error('unable to locate global object');
+    };
+  ```
+
+- 模板引擎-[JavaScript Micro-Templating][10]
+
+  ```js
+    // Simple JavaScript Templating
+    // John Resig - https://johnresig.com/ - MIT Licensed
+    (function(){
+      var cache = {};
+
+      this.tmpl = function tmpl(str, data){
+        // Figure out if we're getting a template, or if we need to
+        // load the template - and be sure to cache the result.
+        var fn = !/\W/.test(str) ?
+          cache[str] = cache[str] ||
+            tmpl(document.getElementById(str).innerHTML) :
+
+          // Generate a reusable function that will serve as a template
+          // generator (and which will be cached).
+          new Function("obj",
+            "var p=[],print=function(){p.push.apply(p,arguments);};" +
+
+            // Introduce the data as local variables using with(){}
+            "with(obj){p.push('" +
+
+            // Convert the template into pure JavaScript
+            str
+              .replace(/[\r\t\n]/g, " ")
+              .split("<%").join("\t")
+              .replace(/((^|%>)[^\t]*)'/g, "$1\r")
+              .replace(/\t=(.*?)%>/g, "',$1,'")
+              .split("\t").join("');")
+              .split("%>").join("p.push('")
+              .split("\r").join("\\'")
+          + "');}return p.join('');");
+
+        // Provide some basic currying to the user
+        return data ? fn( data ) : fn;
+      };
+    })();
+
+    //usage:
+    <script type="text/html" id="item_tmpl">
+      <div id="<%=id%>" class="<%=(i % 2 == 1 ? " even" : "")%>">
+        <div class="grid_1 alpha right">
+          <img class="righted" src="<%=profile_image_url%>"/>
+        </div>
+        <div class="grid_6 omega contents">
+          <p><b><a href="/<%=from_user%>"><%=from_user%></a>:</b> <%=text%></p>
+        </div>
+      </div>
+    </script>
+
+    <script type="text/html" id="user_tmpl">
+      <% for ( var i = 0; i < users.length; i++ ) { %>
+        <li><a href="<%=users&#91;i&#93;.url%>"><%=users&#91;i&#93;.name%></a></li>
+      <% } %>
+    </script>
+
+    var results = document.getElementById("item_tmpl");
+    results.innerHTML = tmpl("item_tmpl", dataObject);
+  ```
+
+- [任意2个对象的浅比较][9]
+
+  ```javascript
+    //比较2个基本数据类型的变量是否相等
+    function is(x, y) {
+      if (x === y) {
+        //排除 +0 == -0
+        return x !== 0 || y !== 0 || 1 / x === 1 / y;
+      } else {
+        return x !== x && y !== y;
+      }
+    }
+
+    function shallowEqual(objA, objB) {
+      if (is(objA, objB)) {
+        return true;
+      }
+
+      if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+        return false;
+      }
+
+      var keysA = Object.keys(objA);
+      var keysB = Object.keys(objB);
+
+      if (keysA.length !== keysB.length) {
+        return false;
+      }
+
+      for (var i = 0; i < keysA.length; i++) {
+        if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+          return false;
+        }
+      }
+
+      return true;
+    }
+  ```
+
 - css命名与驼峰命名转换，[zepto里源码][7]
-    - CSS命名方式转驼峰命名方式
-    ```js
+
+  - CSS命名方式转驼峰命名方式
+
+    ```javascript
     var camelize = function(str){ return str.replace(/-+(.)?/g, function(match, chr){ return chr ? chr.toUpperCase() : '' }) }
     camelize('font-size')  // "fontSize"
     ```
-    - 驼峰转CSS命名方式
-    ```js
+
+  - 驼峰转CSS命名方式
+
+    ```javascript
     function dasherize(str) {
-      return str.replace(/::/g, '/')
-             .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
-             .replace(/([a-z\d])([A-Z])/g, '$1_$2')
-             .replace(/_/g, '-')
-             .toLowerCase()
+    return str.replace(/::/g, '/')
+           .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+           .replace(/([a-z\d])([A-Z])/g, '$1_$2')
+           .replace(/_/g, '-')
+           .toLowerCase()
     }
     dasherize('fontSize')  // "font-size"
     ```
 
 - 数组去重
-    - 使用filter，zepto里使用的方法
-        ```js
-        var uniq = function(array){
-            return [].filter.call(array, function(item, idx){ return array.indexOf(item) == idx })
-        }
-        uniq([1,2,3,3]) //[1, 2, 3]
-        ```
-    - [使用es6里的set][6]
-        ```js
-        [...new Set(array)]
-        ```
+
+  - 使用filter，zepto里使用的方法
+
+    ```javascript
+      var uniq = function(array){
+          return [].filter.call(array, function(item, idx){ return array.indexOf(item) == idx })
+      }
+      uniq([1,2,3,3]) //[1, 2, 3]
+    ```
+
+  - [使用es6里的set][6]
+
+    ```javascript
+      [...new Set(array)]
+    ```
 
 - [类型判断][5]
 
-    ```js
+  ```javascript
     //数组类型判断
     var isArray = function(obj) {
         return Object.prototype.toString.call(obj) === '[object Array]';
@@ -57,10 +186,11 @@
     is('','String')
     is(2,'Number')
     //以上均为true
-    ```
+  ```
+
 - cookie操作
 
-    ```javascript
+  ```javascript
     function getCookie(name) {
         var c;
         return (c = document.cookie.match(new RegExp("(^| )" + name + "=([^;]*)(;|$)"))) ? decodeURIComponent(c[2].replace(/\+/g, "%20")) : null
@@ -72,22 +202,22 @@
         exDate.setDate(exDate.getDate() + expiredays);
         document.cookie = name + "=" + encodeURIComponent(value) + ((expiredays == null) ? "" : ";expires=" + exDate.toGMTString()) + ";path=/";
     }
-    ```
+  ```
 
 - url里查询参数解析
 
-    ```javascript
-    getUrlParams: function(name) {
+  ```javascript
+    function getUrlParams(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
         if (r != null) return decodeURIComponent(r[2]); return null;
     }
-    ```
+  ```
 
 - 时间戳解析成 yyyy.mm.dd 格式
 
-    ```javascript
-    function (time) {
+  ```javascript
+    function format(time) {
         var y,m,d;
 
         time = new Date(parseInt(time));
@@ -101,11 +231,11 @@
 
         return y + '.' + add0(m) + '.' + add0(d);
     }
-    ```
+  ```
 
 - 当天和当月判断
 
-    ```javascript
+  ```javascript
     function isToday(date) {
        let today = new Date(),
            offset = 0;
@@ -128,19 +258,19 @@
            return false;
        }
     }
-    ```
+  ```
 
 - 浏览器检测，判断是否支持canvas
 
-    ```javascript
+  ```javascript
     function canvasSupport() {
         return !!document.createElement('canvas').getContext;
     }
-    ```
+  ```
 
 - [js 判断IOS, 安卓][1],[浏览器类型判断][8]
 
-    ```javascript
+  ```javascript
     var ua = navigator.userAgent  // "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36"
     var platform = navigator.platform
     var webkit = ua.match(/Web[kK]it[\/]{0,1}([\d.]+)/),
@@ -169,11 +299,11 @@
         ios= !!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
         weixin= ua.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
         qq= ua.match(/\sQQ/i) == " qq" //是否QQ
-    ```
+  ```
 
 - 得到地理位置
 
-    ```javascript
+  ```javascript
     function getLocation(callback){
       if(navigator.geolocation){
           navigator.geolocation.getCurrentPosition(
@@ -186,11 +316,11 @@
           );
       }
     }
-    ```
+  ```
 
 - rem计算适配
 
-    ```javascript
+  ```javascript
     (function(doc, win){
       var docEl = doc.documentElement,
           resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
@@ -204,11 +334,11 @@
       win.addEventListener(resizeEvt, recalc, false);
       doc.addEventListener('DOMContentLoaded', recalc, false);
     })(document, window);
-    ```
+  ```
 
 - [另外一种rem方案][3]
 
-    ```javascript
+  ```javascript
     var dpr, rem, scale;
     var docEl = document.documentElement;
     var fontEl = document.createElement('style');
@@ -225,13 +355,13 @@
     // 动态写入样式
     docEl.firstElementChild.appendChild(fontEl);
     fontEl.innerHTML = 'html{font-size:' + rem + 'px!important;}';
-    ```
+  ```
 
 - [px2rem][4]
 
   remUnit 设置为50, 视觉稿750*x
 
-    ```css
+  ```css
     html {
         font-size: 50px
     }
@@ -349,7 +479,7 @@
             font-size: 24px
         }
     }
-    ```
+  ```
 
 [1]: http://caibaojian.com/browser-ios-or-android.html
 [2]: http://loo2k.com/blog/detecting-wechat-client/
@@ -359,3 +489,6 @@
 [6]: http://es6.ruanyifeng.com/#docs/set-map
 [7]: ./learnZepto.md
 [8]: http://www.cnblogs.com/bergwhite/p/7436583.html
+[9]: https://www.jianshu.com/p/3f3f8659fc23
+[10]: https://johnresig.com/blog/javascript-micro-templating/
+[11]: http://es6.ruanyifeng.com/#docs/let

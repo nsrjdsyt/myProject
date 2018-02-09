@@ -4,16 +4,18 @@
   "description": "my webpack multi page test",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --config webpack.config.js",
+    "dev": "node dev-server.js",
+    "start": "webpack-dev-server --inline --hot --config webpack.config.js",
     "build": "webpack"
   },
   "author": "taozhenwei0202@126.com",
   "license": "ISC",
   "dependencies": {
-    "babel-plugin-config-export": "^1.0.0",
+    "art-template-loader": "1.4.3",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-loader": "^7.0.0",
+    "babel-plugin-config-export": "^1.0.0",
     "babel-plugin-transform-remove-strict-mode": "0.0.2",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^0.28.4",
@@ -24,12 +26,12 @@
     "postcss": "^6.0.1",
     "postcss-loader": "^2.0.5",
     "sass-loader": "^6.0.5",
-    "style-loader": "^0.18.2",
-    "url-loader": "^0.5.8",
-    "art-template-loader": "1.4.3",
-    "webpack": "^2.6.1"
+    "style-loader": "^0.20.1",
+    "url-loader": "^0.5.8"
   },
   "devDependencies": {
-    "extract-text-webpack-plugin": "^2.1.2"
+    "extract-text-webpack-plugin": "^2.1.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }

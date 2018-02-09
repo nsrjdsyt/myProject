@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      p{
+        width: 800px;
+        height: 40px;
+        background-color: yellow;
+        color: blue;
+      }
+
+      .method-1{
+        text-align: center;
+      }
+
+
+      .method-2{
+        display: flex;
+        justify-content: center;
+      }
+
+
+      .method-3{
+        line-height: 40px;
+      }
+
+      .method-4{
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .method-5{
+        display: flex;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="method-1">
+      内联元素水平居中方案, text-align: center;
+    </p>
+
+    <hr/>
+
+    <p class="method-2">
+      内联元素水平居中方案, display: flex;  justify-content: center;
+    </p>
+
+    <hr/>
+
+    <p class="method-3">
+      内联元素垂直居中方案, height = line-height
+    </p>
+
+    <p class="method-4">
+      内联元素垂直居中方案, display: table-cell; vertical-align: middle;
+    </p>
+
+    <p class="method-5">
+      内联元素垂直居中方案, display: table-cell; vertical-align: middle;
+    </p>
+  </hr/>
+  </body>
+</html>
