@@ -5,6 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin'); //提取css到�
 
 module.exports = {
   entry: {
+    common: './src/pages/common/constant.js',
     index: './src/pages/index/index.js'
   },
   output: {
@@ -64,7 +65,7 @@ module.exports = {
       template: 'index.html', //生成文件的 模板
       title: 'index page',
       inject: 'body',
-      chunks: ['index']
+      chunks: ['common', 'index']
     }),
     new ExtractTextPlugin('css/[name].css'),
     new webpack.optimize.UglifyJsPlugin(),
