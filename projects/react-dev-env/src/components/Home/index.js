@@ -1,8 +1,12 @@
 import React from 'react'
 import {Form, Icon, Input, Button, Checkbox} from 'antd';
+import './index.scss'
+
 const FormItem = Form.Item;
 // import './style.css'  //报错：Import in body of module; reorder to top  import/first
 require('./style.css')
+
+
 
 class Home extends React.Component {
   handleSubmit = (e) => {

@@ -126,26 +126,26 @@
   - CSS命名方式转驼峰命名方式
 
     ```javascript
-    var camelize = function(str){ return str.replace(/-+(.)?/g, function(match, chr){ return chr ? chr.toUpperCase() : '' }) }
-    camelize('font-size')  // "fontSize"
+      var camelize = function(str){ return str.replace(/-+(.)?/g, function(match, chr){ return chr ? chr.toUpperCase() : '' }) }
+      camelize('font-size')  // "fontSize"
     ```
 
   - 驼峰转CSS命名方式
 
     ```javascript
-    function dasherize(str) {
-    return str.replace(/::/g, '/')
-           .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
-           .replace(/([a-z\d])([A-Z])/g, '$1_$2')
-           .replace(/_/g, '-')
-           .toLowerCase()
-    }
-    dasherize('fontSize')  // "font-size"
+      function dasherize(str) {
+      return str.replace(/::/g, '/')
+             .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+             .replace(/([a-z\d])([A-Z])/g, '$1_$2')
+             .replace(/_/g, '-')
+             .toLowerCase()
+      }
+      dasherize('fontSize')  // "font-size"
     ```
 
 - 数组去重
 
-  - 使用filter，zepto里使用的方法
+  - 使用filter，zepto里使用的方法，IE9+
 
     ```javascript
       var uniq = function(array){
@@ -158,6 +158,24 @@
 
     ```javascript
       [...new Set(array)]
+    ```
+
+    ```js
+      Array.prototype.distinct = function() {
+        var arr = this,
+            result = [],
+            len = arr.length;
+
+        for (var i = 0; i < len; i++) {
+          if (result.indexOf(arr[i]) === -1) {
+            result.push(arr[i]);
+          }
+        }
+        return result;
+      };
+      
+      var a = [1, 2, 3, 4, 2, 3, 54, 1, 2, 3, 2, 4, 5, 0];
+      var b = a.distinct();    // [1, 2, 3, 4, 54, 5, 0]
     ```
 
 - [类型判断][5]

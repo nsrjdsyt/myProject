@@ -1,4 +1,5 @@
-class Bundle extends Component {
+import React from 'react'
+class Bundle extends React.Component {
   state = {
     // short for "module" but that's a keyword in js, so "mod"
     mod: null

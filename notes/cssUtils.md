@@ -61,8 +61,6 @@
             height: 12px;
             border: 2px solid #353d44;
             border-width: 2px 2px 0 0;
-            -webkit-transform: rotate(45deg);
-            -ms-transform: rotate(45deg);
             transform: rotate(45deg);
         }
         .triangle{
@@ -106,18 +104,6 @@
   ```css
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-tap-highlight-color: transparent;  
-  ```
-
-- webkit 水平居中
-
-  ```css
-    display: -webkit-box;
-    -webkit-box-pack: center;
-    -webkit-box-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
   ```
 
 - min-height: 最小高度兼容代码
@@ -204,7 +190,7 @@
             margin-top: 10px;
             margin-left: 5px;
             text-align: left;
-            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
         }
 
         label::before {
@@ -214,14 +200,14 @@
             height: 30px;
             background: #EEE;
             vertical-align: middle;
-            -webkit-border-radius: 50%;
+            border-radius: 50%;
             margin-right: 5px;
-            -webkit-box-sizing:border-box;
-          -webkit-transition:background ease-in .5s
+            box-sizing:border-box;
+            transition:background ease-in .5s
         }
 
         input[type="checkbox"]:checked+label::before{
-              background-color: rgb(53, 183, 111);
+            background-color: rgb(53, 183, 111);
             border: 5px #EEEEEE solid;
         }
     ```
