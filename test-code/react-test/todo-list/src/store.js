@@ -3,6 +3,7 @@ import {reducer as todosReducer} from './todos'
 import {reducer as filterReducer} from './filter'
 
 //react-addons-perf无法使用： https://stackoverflow.com/questions/46578145/module-not-found-cant-resolve-react-dom-lib-reactperf-in-node-modules-reac
+//Profiling Components with the Chrome Performance Tab: https://reactjs.org/docs/optimizing-performance.html#profiling-components-with-the-chrome-performance-tab
 
 const win = window
 
