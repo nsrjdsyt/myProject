@@ -19,6 +19,7 @@ const TodoList = ({todos, onAdd, onDelete, onToggle}) => {
 }
 
 const mapStateToProps = (state) => {
+  console.log("mapStateToProps");
   return {
     todos: selectVisibleTodos(state)
   }
