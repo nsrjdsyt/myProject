@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <title>两列布局中单列定宽单列自适应布局: from http://www.cnblogs.com/xiaohuochai/p/5452865.html</title>
   <style>
-    /*方案一
+    /*方案一： parent高度 = max(left高度, rightWrap高度)，需要清除浮动，right 设置margin 防止与left叠在一起
     p {
       margin: 0;
     }
@@ -23,9 +23,10 @@
     .right {
       margin-left: 120px;
     }
-    end */
+    */
 
-    /*方案二
+
+    /*方案二： parent高度 = max(left高度, rightWrap高度)， 需要增加结构， rightWrap width: 100%; margin-left: -100px; 使得right可以自适应
     p {
       margin: 0;
     }
@@ -52,7 +53,8 @@
     }
     */
 
-    /*方案三
+
+    /*方案三： parent高度 = max(left高度, rightWrap高度)，需要清除浮动， right 设置float
 
     p {
       margin: 0;
@@ -75,7 +77,8 @@
     }
     */
 
-    /*方案四
+
+    /*方案四： parent高度 = max(left高度, rightWrap高度)， 需要清除浮动
     p {
       margin: 0;
     }
@@ -97,7 +100,8 @@
     }
     */
 
-    /*方案五
+
+    /*方案五： parent高度 = max(left高度, rightWrap高度)， right 使用 calc(100% - 120px) 自适应
 
     p {
       margin: 0;
@@ -123,7 +127,7 @@
     }
     */
 
-    /*方案六
+    /*方案六：parent高度 = max(left高度, rightWrap高度)， 需要增加结构，rightWrap width: 100%; margin-left: -100px; 使得right可以自适应
 
     p {
       margin: 0;
@@ -152,9 +156,9 @@
     .right {
       margin-left: 120px;
     }
-*/
+  */
 
-    /*方案七*/
+    /*方案七：parent高度 === left高度 === rightWrap 高度 由于table-cell元素无法设置margin，若需要在元素间设置间距，需要增加结构
 
     p {
       margin: 0;
@@ -178,8 +182,10 @@
     .right {
       margin-left: 20px;
     }
+    */
 
-    /*方案八
+
+    /*方案八： left 脱离文档流， parent高度由right撑起；会出现left 高度 大于 right的情况
 
     p {
       margin: 0;
@@ -188,7 +194,6 @@
     .parent {
       position: relative;
       width: 100%;
-      height: 40px;
     }
 
     .left {
@@ -198,13 +203,12 @@
     }
 
     .right {
-      position: absolute;
-      left: 120px;
-      right: 0;
+      margin-left: 120px;
     }
     */
 
-    /*方案九
+
+    /*方案九： parent高度 === left高度 === right高度
 
     p {
       margin: 0;
@@ -222,9 +226,9 @@
     .right {
       flex: 1;
     }
-  */
+    */
 
-    /*方案十*/
+    /*方案十
 
     p {
       margin: 0;
@@ -235,11 +239,12 @@
       grid-template-columns: 100px 1fr;
       grid-gap: 20px
     }
+    */
   </style>
 </head>
 
 <body>
-  <!-- 方案一、三 四 五 八 九 十-->
+  <!-- 方案一、三 四 五 八 九 十
   <div class="parent" style="background-color: lightgrey;">
     <div class="left" style="background-color: lightblue;">
       <p>left</p>
@@ -249,12 +254,15 @@
       <p>right</p>
     </div>
   </div>
+-->
 
 
-  <!-- 方案二 、 六、七
+  <!-- 方案二 、 六、七-->
 
   <div class="parent" style="background-color: lightgrey;">
     <div class="left" style="background-color: lightblue;">
+      <p>left</p>
+      <p>left</p>
       <p>left</p>
     </div>
     <div class="rightWrap" style="background-color: pink;">
@@ -264,9 +272,6 @@
       </div>
     </div>
   </div>
--->
-
-
 
 </body>
 
