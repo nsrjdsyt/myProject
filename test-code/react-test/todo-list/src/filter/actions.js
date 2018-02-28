@@ -8,7 +8,7 @@ export const setFilter = (filter) => {
 }
 
 export const testLogMiddleware = (filter) => {    //异步action
-  return (dispatch) => {
+  return (dispatch, getState) => {
     setTimeout(() => {
       dispatch(setFilter(filter))
     }, 500)
