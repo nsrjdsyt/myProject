@@ -24,6 +24,6 @@ const reducers = combineReducers({
   filter: filterReducer
 })
 
-const store = createStore(reducers, {}, storeEnHancers)
+const store = createStore(reducers, {}, storeEnHancers) 
 
 export default store
