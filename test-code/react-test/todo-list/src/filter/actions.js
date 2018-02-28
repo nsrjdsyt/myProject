@@ -6,3 +6,11 @@ export const setFilter = (filter) => {
     filter
   }
 }
+
+export const testLogMiddleware = (filter) => {    //异步action
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(setFilter(filter))
+    }, 500)
+  }
+}

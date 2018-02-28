@@ -21,7 +21,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   console.log("mapDispatchToProps filter click", ownProps); //组件挂载时调用一次
   return {
-    onClick: () => {dispatch(actions.setFilter(ownProps.filter))}
+    // onClick: () => {dispatch(actions.testLogMiddleware(ownProps.filter))},  //使用异步action
+    onClick: () => {dispatch(actions.setFilter(ownProps.filter))}              //使用同步action
   }
 }
 
