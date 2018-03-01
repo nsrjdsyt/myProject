@@ -2,7 +2,7 @@ import React from 'react'
 import TodoItem from './todoItem'
 import {connect} from 'react-redux'
 import {selectVisibleTodos} from './../selector'
-import TransitionGroup from 'react-transition-group/CSSTransitionGroup'
+import TransitionGroup from 'react-addons-css-transition-group' 
 import './todoList.css'
 
 const TodoList = ({todos, onAdd, onDelete, onToggle}) => {
