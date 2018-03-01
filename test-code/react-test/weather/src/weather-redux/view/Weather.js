@@ -1,9 +1,20 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {fetchWeather} from './../actions'
 
-const Weather = ({city, weather, temp1, temp2}) => (<div>
-  {city} {weather} 最低气温 {temp1} 最高气温 {temp2}
-</div>)
+class Weather extends Component {
+  componentDidMount() {
+    this.props.fetchWeather()
+  }
+
+  render() {
+    const {city, weather, temp1, temp2} = this.props
+
+    return (
+      <div>{city}: {weather} {temp1}℃ 至 {temp2}℃</div>
+    )
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
@@ -11,4 +22,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Weather)
+const mapDispatchToProps = {
+  fetchWeather
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Weather)

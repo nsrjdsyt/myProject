@@ -6,10 +6,9 @@ class Weather extends Component {
   }
 
   componentDidMount() {
-    const apiUrl = 'data/cityinfo/101010100.html'  //获取天气api： http://www.weather.com.cn/data/cityinfo/101010100.html
+    const apiUrl = '/weatherInfo.json'
 
     fetch(apiUrl).then((response) => {
-      console.log(response);
       if(response.status !== 200){
         throw new Error(response.status)
       }else{
@@ -38,7 +37,7 @@ class Weather extends Component {
     const {city, weather, temp1, temp2} = this.state.weather
 
     return <div>
-      {city} {weather} 最低气温 {temp1} 最高气温 {temp2}
+      {city}: {weather} {temp1}℃ 至 {temp2}℃
     </div>
   }
 }

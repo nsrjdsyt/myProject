@@ -16,8 +16,7 @@ export const fetchWeatherFailure = (error) => ({
 
 export const fetchWeather = () => {
   return (dispatch) => {
-    const apiUrl = 'data/cityinfo/101010100.html'  //获取天气api： http://www.weather.com.cn/data/cityinfo/101010100.html
-
+    const apiUrl = '/weatherInfo.json'
     dispatch(fetchWeatherStarted())
 
     fetch(apiUrl).then((response) => {
