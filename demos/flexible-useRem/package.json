@@ -1,7 +1,7 @@
 {
-  "name": "adapter",
+  "name": "flexible use rem",
   "version": "1.0.0",
-  "description": "adapter test",
+  "description": "flexible use rem",
   "main": "index.js",
   "scripts": {
     "dev": "node dev-server.js",

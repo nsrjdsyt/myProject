@@ -5,7 +5,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin'); //提取css到�
 
 module.exports = {
   entry: {
-    useRem: './src/useRem/index.js'
+    useRem: './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
