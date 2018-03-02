@@ -173,7 +173,7 @@
         }
         return result;
       };
-      
+
       var a = [1, 2, 3, 4, 2, 3, 54, 1, 2, 3, 2, 4, 5, 0];
       var b = a.distinct();    // [1, 2, 3, 4, 54, 5, 0]
     ```
@@ -337,167 +337,194 @@
   ```
 
 - rem计算适配
+  - [rem方案][3]
 
-  ```javascript
-    (function(doc, win){
-      var docEl = doc.documentElement,
-          resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-          recalc = function(){
-              var clientWidth = docEl.clientWidth;
-              if(!clientWidth) return;
-              docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
-          };
+    ```javascript
+      var dpr, rem, scale;
+      var docEl = document.documentElement;
+      var fontEl = document.createElement('style');
+      var metaEl = document.querySelector('meta[name="viewport"]');
 
-      if(!doc.addEventListener) return;
-      win.addEventListener(resizeEvt, recalc, false);
-      doc.addEventListener('DOMContentLoaded', recalc, false);
-    })(document, window);
-  ```
+      dpr = window.devicePixelRatio || 1;
+      rem = docEl.clientWidth * dpr / 10; //屏幕
+      scale = 1 / dpr;
 
-- [另外一种rem方案][3]
 
-  ```javascript
-    var dpr, rem, scale;
-    var docEl = document.documentElement;
-    var fontEl = document.createElement('style');
-    var metaEl = document.querySelector('meta[name="viewport"]');
+      // 设置viewport，进行缩放，达到高清效果
+      metaEl.setAttribute('content', 'width=' + dpr * docEl.clientWidth + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no');
 
-    dpr = window.devicePixelRatio || 1; rem = docEl.clientWidth * 2 / 10; scale = 1 / dpr;
+      // 设置data-dpr属性，留作的css hack之用
+      docEl.setAttribute('data-dpr', dpr);
 
-    // 设置viewport，进行缩放，达到高清效果
-    metaEl.setAttribute('content', 'width=' + dpr * docEl.clientWidth + ',initial-scale=' + scale + ',maximum-scale=' + scale + ', minimum-scale=' + scale + ',user-scalable=no');
+      // 动态写入样式
+      docEl.firstElementChild.appendChild(fontEl);
+      fontEl.innerHTML = 'html{font-size:' + rem + 'px!important;}';
 
-    // 设置data-dpr属性，留作的css hack之用
-    docEl.setAttribute('data-dpr', dpr);
+      // 给js调用的，某一dpr下rem和px之间的转换函数
+      window.rem2px = function(v) {
+        v = parseFloat(v);
+        return v * rem;
+      };
+      window.px2rem = function(v) {
+        v = parseFloat(v);
+        return v / rem;
+      };
 
-    // 动态写入样式
-    docEl.firstElementChild.appendChild(fontEl);
-    fontEl.innerHTML = 'html{font-size:' + rem + 'px!important;}';
-  ```
+      window.dpr = dpr;
+      window.rem = rem;
+    ```
+    ```less
+      // 例如: .px2rem(height, 80); iphone6的视觉稿，它的基准值就是75
+      .px2rem(@name, @px){
+          @{name}: @px / 75 * 1rem;
+      }
 
-- [px2rem][4]
+      //例如： .px2px(font-size, 32);
+      .px2px(@name, @px){
+          @{name}: round(@px / 2) * 1px;
+          [data-dpr="2"] & {
+              @{name}: @px * 1px;
+          }
+          // for mx3
+          [data-dpr="2.5"] & {
+              @{name}: round(@px * 2.5 / 2) * 1px;
+          }
+          // for 小米note
+          [data-dpr="2.75"] & {
+              @{name}: round(@px * 2.75 / 2) * 1px;
+          }
+          [data-dpr="3"] & {
+              @{name}: round(@px / 2 * 3) * 1px
+          }
+          // for 三星note4
+          [data-dpr="4"] & {
+              @{name}: @px * 2px;
+          }
+      }
+    ```
 
-  remUnit 设置为50, 视觉稿750*x
+  - [px2rem][4] 媒体查询，修改html的font-size
 
-  ```css
-    html {
-        font-size: 50px
-    }
+    ```css
+      /*将屏幕宽度等分15份， 以屏幕宽375px为例，375px/15 = 25px,即每份25px 将html标签的font-size 设置25px; 视觉稿参照iphone6 宽度750px，等分15份，即 750px/15 = 50, 即在写css样式时 remUnit=50,或者 使用[px2rem][4]npm包， remUnit设置为50*/
+      html {
+          font-size: 50px
+      }
 
-    body {
-        font-size: 24px
-    }
+      body {
+          font-size: 24px
+      }
 
-    @media screen and (min-width:320px) {
-        html {
-            font-size: 21.33px
-        }
+      @media screen and (min-width:320px) {
+          html {
+              font-size: 21.33px
+          }
 
-        body {
-            font-size: 12px
-        }
-    }
+          body {
+              font-size: 12px
+          }
+      }
 
-    @media screen and (min-width:360px) {
-        html {
-            font-size: 24px
-        }
+      @media screen and (min-width:360px) {
+          html {
+              font-size: 24px
+          }
 
-        body {
-            font-size: 12px
-        }
-    }
+          body {
+              font-size: 12px
+          }
+      }
 
-    @media screen and (min-width:375px) {
-        html {
-            font-size: 25px
-        }
+      @media screen and (min-width:375px) {
+          html {
+              font-size: 25px
+          }
 
-        body {
-            font-size: 12px
-        }
-    }
+          body {
+              font-size: 12px
+          }
+      }
 
-    @media screen and (min-width:384px) {
-        html {
-            font-size: 25.6px
-        }
+      @media screen and (min-width:384px) {
+          html {
+              font-size: 25.6px
+          }
 
-        body {
-            font-size: 14px
-        }
-    }
+          body {
+              font-size: 14px
+          }
+      }
 
-    @media screen and (min-width:400px) {
-        html {
-            font-size: 26.67px
-        }
+      @media screen and (min-width:400px) {
+          html {
+              font-size: 26.67px
+          }
 
-        body {
-            font-size: 14px
-        }
-    }
+          body {
+              font-size: 14px
+          }
+      }
 
-    @media screen and (min-width:414px) {
-        html {
-            font-size: 27.6px
-        }
+      @media screen and (min-width:414px) {
+          html {
+              font-size: 27.6px
+          }
 
-        body {
-            font-size: 14px
-        }
-    }
+          body {
+              font-size: 14px
+          }
+      }
 
-    @media screen and (min-width:424px) {
-        html {
-            font-size: 28.27px
-        }
+      @media screen and (min-width:424px) {
+          html {
+              font-size: 28.27px
+          }
 
-        body {
-            font-size: 14px
-        }
-    }
+          body {
+              font-size: 14px
+          }
+      }
 
-    @media screen and (min-width:480px) {
-        html {
-            font-size: 32px
-        }
+      @media screen and (min-width:480px) {
+          html {
+              font-size: 32px
+          }
 
-        body {
-            font-size: 15.36px
-        }
-    }
+          body {
+              font-size: 15.36px
+          }
+      }
 
-    @media screen and (min-width:540px) {
-        html {
-            font-size: 36px
-        }
+      @media screen and (min-width:540px) {
+          html {
+              font-size: 36px
+          }
 
-        body {
-            font-size: 17.28px
-        }
-    }
+          body {
+              font-size: 17.28px
+          }
+      }
 
-    @media screen and (min-width:720px) {
-        html {
-            font-size: 48px
-        }
+      @media screen and (min-width:720px) {
+          html {
+              font-size: 48px
+          }
 
-        body {
-            font-size: 23.04px
-        }
-    }
+          body {
+              font-size: 23.04px
+          }
+      }
 
-    @media screen and (min-width:750px) {
-        html {
-            font-size: 50px
-        }
+      @media screen and (min-width:750px) {
+          html {
+              font-size: 50px
+          }
 
-        body {
-            font-size: 24px
-        }
-    }
-  ```
+          body {
+              font-size: 24px
+          }
+      }
+    ```
 
 [1]: http://caibaojian.com/browser-ios-or-android.html
 [2]: http://loo2k.com/blog/detecting-wechat-client/
