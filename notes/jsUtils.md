@@ -91,7 +91,7 @@
         //排除 +0 == -0
         return x !== 0 || y !== 0 || 1 / x === 1 / y;
       } else {
-        return x !== x && y !== y;
+        return x !== x && y !== y; //NaN
       }
     }
 

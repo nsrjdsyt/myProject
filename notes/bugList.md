@@ -11,7 +11,7 @@
 
   给label绑定点击事件，点击label,会触发input 的click事件
 
-## app bugList
+## app bug list
 
 - app中 点击高亮问题
 
@@ -29,7 +29,7 @@
 
     网上解决方案：[ios和android下的区别][1]
 
-## pc bugList
+## pc bug list
 - $（window）.scroll() 页面滚动事件，绑定到window上，不要绑定到document，ie7有兼容问题
 
 - jquery.on()绑定事件时，不要使用链式绑定多个事件，ie7有兼容问题

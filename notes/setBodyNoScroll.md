@@ -7,11 +7,11 @@ let SetBodyNoScrollUtil = (function(bodyCls) {
     return {
         afterOpen: function() {
             scrollTop = rootElement.scrollTop;
-            document.body.classList.add(bodyCls);
-            document.body.style.top = -scrollTop + 'px';
+            rootElement.classList.add(bodyCls);
+            rootElement.style.top = -scrollTop + 'px';
         },
         beforeClose: function() {
-            document.body.classList.remove(bodyCls);
+            rootElement.classList.remove(bodyCls);
             rootElement.scrollTop = scrollTop;
         }
     };

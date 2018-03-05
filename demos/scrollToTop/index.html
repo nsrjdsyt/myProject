@@ -34,7 +34,7 @@
     <div id="top">置顶</div>
 
     <script>
-        let _body = document.body,
+        let _body = document.documentElement,
             _top = document.getElementById("top")
 
         _top.addEventListener("click", function(){
@@ -42,6 +42,7 @@
         });
 
         window.addEventListener("scroll", function(){
+          console.log(_body.scrollTop);
             if (_body.scrollTop > 100) {
                 _top.style.display = "block";
             } else {

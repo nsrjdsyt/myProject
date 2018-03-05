@@ -80,9 +80,9 @@ gulp.task('serve', ['mock','sass','image','js','html'], function () {
 	connect.server({
 		root: __dirname,
 		livereload: true,
-        middleware: function(){
-            return [jsonPlaceholderProxy]
-        }
+    middleware: function(){
+        return [jsonPlaceholderProxy]
+    }
 	});
 });
 
