@@ -1,3 +1,5 @@
+//code-split: https://doc.react-china.org/docs/code-splitting.html
+//https://reacttraining.com/react-router/web/guides/code-splitting
 import React from 'react'
 class Bundle extends React.Component {
   state = {

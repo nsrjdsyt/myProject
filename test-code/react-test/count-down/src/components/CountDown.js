@@ -34,7 +34,8 @@ class CountDown extends Component {
   render() {
     return (
       <div>
-        {this.props.children(this.state.count)}
+        {/*  子元素未函数 */}
+        {this.props.children(this.state.count)} 
       </div>
     )
   }
