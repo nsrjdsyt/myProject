@@ -43,7 +43,7 @@
 
         window.addEventListener("scroll", function(){
           console.log(_body.scrollTop);
-            if (_body.scrollTop > 100) {
+            if (_body.scrollTop > 100) {    //document.documentElement.scrollTop 要获取当前页面的滚动条纵坐标位置
                 _top.style.display = "block";
             } else {
                 _top.style.display = "none";

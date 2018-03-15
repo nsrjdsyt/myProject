@@ -15,7 +15,7 @@ if(process.env.NODE_ENV !== 'production'){
 }
 
 const storeEnHancers = compose(
-  applyMiddleware(...middlewares),
+  applyMiddleware(...middlewares),                                    //返回新的store创建函数， （createStore） => {...store, dispatch}
   (win && win.devToolsExtension) ? win.devToolsExtension() : (f) => f
 )
 
@@ -24,6 +24,10 @@ const reducers = combineReducers({
   filter: filterReducer
 })
 
-const store = createStore(reducers, {}, storeEnHancers) 
+const store = createStore(reducers, {}, storeEnHancers)  //storeEnHancers(createStore)(reducer, {})
+
+// or
+// const store = applyMiddleware(...middlewares)(createStore)(reducers)
+
 
 export default store
