@@ -21,6 +21,7 @@ export const getJSON = (url) => {
       }
     };
     const client = new XMLHttpRequest();
+
     client.open("GET", url);
     client.onreadystatechange = handler;
     client.responseType = "json";
@@ -32,13 +33,14 @@ export const getJSON = (url) => {
   return promise;
 };
 
-
 //example:
-// getJSON("/posts.json").then((json) => {
-//   console.log('Contents: ' + json);
-// }, function(error) {
-//   console.error('出错了', error);
-// });
+getJSON("/posts.json").then((json) => {
+  console.log('Contents: ' + json);
+}, function(error) {
+  console.error('出错了', error);
+});
+
+
 
 // export const jsonp = (() => {
 //   let count = 0

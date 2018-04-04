@@ -5,7 +5,7 @@ import CountDownHOC from './components/CountDownHOC'
 
 const WrappedComponent = ({count}) => (<div>{count}</div>)
 
-const NewComponent = CountDownHOC(WrappedComponent, 10)
+const NewComponent = CountDownHOC(10)(WrappedComponent)
 
 class App extends Component {
   render() {
