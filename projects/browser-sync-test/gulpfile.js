@@ -35,7 +35,11 @@ gulp.task('html', function() {
 
 // Compile sass into CSS & auto-inject into browsers
 gulp.task('sass', function() {
-    return gulp.src("./src/scss/*.scss").pipe(sass()).pipe(postcss([autoprefixer({browsers: ['last 1 version']}),cssnano()])).pipe(gulp.dest("build/css")).pipe(browserSync.stream());
+    return gulp.src("./src/scss/*.scss")
+      .pipe(sass())
+      .pipe(postcss([autoprefixer({browsers: ['last 1 version']}), cssnano()]))
+      .pipe(gulp.dest("build/css"))
+      .pipe(browserSync.stream());
 });
 
 //js

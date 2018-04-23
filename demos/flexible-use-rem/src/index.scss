@@ -36,7 +36,7 @@ body{
 }
 
 #root{
-  width: px2rem(750); //or: @include px2rem(width, 750);
+  width: px2rem(750); //or mixin: @include px2rem(width, 750);
   height: 100%;
 
   .wrap{

@@ -1,28 +1,17 @@
-#
+#弹窗内容滚动时，防止body跟着滚动
 
 ```js
-let SetBodyNoScrollUtil = (function(bodyCls) {
-    let scrollTop,
-        rootElement = document.body || document.scrollingElement;
-    return {
-        afterOpen: function() {
-            scrollTop = rootElement.scrollTop;
-            rootElement.classList.add(bodyCls);
-            rootElement.style.top = -scrollTop + 'px';
-        },
-        beforeClose: function() {
-            rootElement.classList.remove(bodyCls);
-            rootElement.scrollTop = scrollTop;
-        }
-    };
-})('body-no-scroll');
+  function stopBodyScroll (isFixed) {
+    if (isFixed) {
+      top = window.scrollY
 
-export default SetBodyNoScrollUtil;
-```
+      bodyEl.style.position = 'fixed'
+      bodyEl.style.top = -top + 'px'
+    } else {
+      bodyEl.style.position = ''
+      bodyEl.style.top = ''
 
-```css
-.body-no-scroll{
-  position: fixed;
-  width: 100%;
-}
+      window.scrollTo(0, top) // 回到原先的top
+    }
+  }
 ```

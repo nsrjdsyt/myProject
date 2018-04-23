@@ -14,7 +14,9 @@
             display: block;
             border: 1px solid black;
             background-color: grey;
-            &:hover { background-color: white }
+            &:hover { 
+              background-color: white;
+            }
           }
           .tab { ... }
           .citation { ... }
