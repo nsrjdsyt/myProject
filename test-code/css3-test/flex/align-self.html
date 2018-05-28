@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>align-self</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 1200px;
+      height: 800px;
+      margin: 50px;
+      border: 1px solid grey;
+    }
+
+    .item {
+      flex: 1;
+      background-color: #43bffd;
+      text-align: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .auto {
+      align-self: auto;
+    }
+
+    .flex-start {
+      align-self: flex-start;
+    }
+
+    .flex-end {
+      align-self: flex-end;
+    }
+
+    .center {
+      align-self: center;
+    }
+
+    .baseline {
+      align-self: baseline;
+    }
+
+    .stretch {
+      align-self: stretch;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content">
+    <div class="item auto">auto</div>
+    <div class="item flex-start">flex-start</div>
+    <div class="item flex-end">flex-end</div>
+    <div class="item center">center</div>
+    <div class="item baseline">baseline</div>
+    <div class="item stretch">stretch</div>
+  </div>
+</body>
+
+</html>
