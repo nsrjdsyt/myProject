@@ -10,7 +10,7 @@ JSON.stringify([undefined, Object, Symbol("")]);
 // "[null,null,null]"
 ```
 
-2.对 包含循环引用的对象（对象之间相互引用，形成无限循环\) 序列话时，会抛出错误 Converting circular structure to JSON
+2.对包含循环引用的对象（对象之间相互引用，形成无限循环\) 序列话时，会抛出错误 Converting circular structure to JSON
 
 ```js
 const obj1 = {}
@@ -51,7 +51,7 @@ JSON.stringify(value[, replacer])
 | null或未提供 | value的所有属性都会被序列化 |
 
 ```js
-// replacer函数
+// replacer 为函数
 
 const replacer = function(key, value){
 if(typeof(value) === 'function'){
@@ -100,8 +100,8 @@ JSON.stringify(value[, replacer[, space]])
 
 | space | 描述 |
 | :--- | :--- |
-| 数字 | 在字符串化时每一级别会比上一级别缩进多这个数字值的空格（最多10个空格） |
-| 字符串 | 每一级别会比上一级别多缩进用该字符串（或该字符串的前十个字符） |
+| 数字 | 每一级别会比上一级别缩进space个空格（最多10个空格） |
+| 字符串 | 每一级别会比上一级别缩进该字符串（或该字符串的前十个字符） |
 
 ![](./images/space@2x.png)
 
@@ -123,5 +123,9 @@ JSON.stringify(obj)
 JSON.stringify({y: obj})
 // "{"y":"2"}"
 ```
+
+#### 参考文章
+
+* [JSON.stringify\(\)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
 
